@@ -1,5 +1,6 @@
 const mongoose =require('mongoose');
 const Movie=require('./models/movie');
+const Schedule=require('./models/schedule');
 const { validationResult } = require('express-validator');
 
 mongoose.connect(
@@ -26,4 +27,18 @@ const addMovie=async(req,res)=>{
     res.json(result);
 };
 
+const addSchedule=async(req,res)=>{
+    const createSchedule=new Schedule({
+        date: req.body.date,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time,
+        movie: req.body.movie,
+        screen:req.body.screen
+    });
+    const result = await createSchedule.save();
+     
+    res.json(result);
+};
+
 exports.addMovie=addMovie;
+exports.addSchedule=addSchedule;
