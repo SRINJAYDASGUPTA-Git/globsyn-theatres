@@ -1,12 +1,13 @@
-const mongoose=require('mongoose');
-const { type } = require('os');
+const mongoose = require('mongoose');
 
 const scheduleSchema = new mongoose.Schema({
-    date: {type:Date , required:true},
-    start_time: {type:Number, required:true},
-    end_time: {type:Number,required:true},
-    movie: {type:String,required:true},
-    screen: {type:Number,required:true},
+  date: { type: Date, required: true },
+  start_time: { type: String, required: true }, // Store time as a string in HH:mm format
+  end_time: { type: String, required: true }, // Store time as a string in HH:mm format
+  movie: { type: mongoose.Schema.Types.ObjectId, ref: "Movie", required: true },
+  screen: { type: Number, required: true },
 });
 
-module.exports=mongoose.model('Schedule',scheduleSchema);
+const Schedule = mongoose.model("Schedule", scheduleSchema);
+
+module.exports = Schedule

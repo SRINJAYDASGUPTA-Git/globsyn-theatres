@@ -1,7 +1,9 @@
-const mongoose =require('mongoose');
-const Movie=require('./models/movie');
-const Schedule=require('./models/schedule');
-const { validationResult } = require('express-validator');
+const mongoose = require('mongoose')
+const Movie = require( './models/movie');
+const Schedule = require( './models/schedule');
+const Ticket = require( './models/ticket');
+const User = require( './models/user');
+// import { validationResult } from 'express-validator';
 
 mongoose.connect(
     'mongodb://localhost:27017'
@@ -40,5 +42,47 @@ const addSchedule=async(req,res)=>{
     res.json(result);
 };
 
-exports.addMovie=addMovie;
-exports.addSchedule=addSchedule;
+const addTicket = async(req, res) => {
+    const createTicket = new Ticket({
+        name: req.body.name,
+        date: req.body.date,
+        time: req.body.time,
+        movie:req.body.movie,
+        schedule: req.body.schedule,
+        screen: req.body.screen,
+        seat: req.body.seat,
+        seatType: req.body.seatType,
+        price: req.body.price,
+    });
+    
+    const result = await createTicket.save();
+
+    res.json(result);
+}
+
+const addUser = async (req, res) => {
+  const { name, email, phone, password } = req.body;
+  const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
+  if (existingUser) {
+    return res.status(400).json({ message: 'Email or phone number already exists' });
+  }
+
+  try {
+    const newUser = new User({
+      name,
+      email,
+      phone,
+      password
+    });
+
+    const result = await newUser.save();
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.addUser = addUser;
+exports.addMovie = addMovie;
+exports.addSchedule = addSchedule;
+exports.addTicket = addTicket;
