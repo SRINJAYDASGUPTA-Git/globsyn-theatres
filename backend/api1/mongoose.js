@@ -87,6 +87,28 @@ const getScheduleById = async(req, res) => {
     }
 }
 
+const updateSchedule = async (req, res) => {
+  const { id } = req.params;
+  const { date, start_time, end_time, movie, screen } = req.body;
+  try {
+    const schedule = await Schedule.findById(id);
+    if (!schedule) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+
+    schedule.date = date || schedule.date;
+    schedule.start_time = start_time || schedule.start_time;
+    schedule.end_time = end_time || schedule.end_time;
+    schedule.movie = movie || schedule.movie;
+    schedule.screen = screen || schedule.screen;
+
+    const result = await schedule.save();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const addTicket = async (req, res) => {
   const createTicket = new Ticket({
     name: req.body.name,
@@ -104,6 +126,28 @@ const addTicket = async (req, res) => {
 
   res.json(result);
 };
+
+const getTickets = async (req, res) => {
+  try {
+    const tickets = await Ticket.find();
+    res.status(200).json(tickets);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+const getTicketById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const ticket = await Ticket.findById(id);
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket not found" });
+    }
+    res.status(200).json(ticket);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 const addUser = async (req, res) => {
   const { name, email, phone, password } = req.body;
@@ -128,6 +172,53 @@ const addUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { name, email, phone, password } = req.body;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.phone = phone || user.phone;
+    user.password = password || user.password;
+
+    await user.save();
+
+    res.status(200).json({ message: "User updated successfully", user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 const addScreen = async (req, res) => {
   const { screenNumber, totalSeats, seatLayout, description } = req.body;
@@ -194,3 +285,9 @@ exports.getScreens = getScreens;
 exports.getScreenByID = getScreenById;
 exports.getSchedules = getSchedules
 exports.getScheduleById = getScheduleById
+exports.getTickets = getTickets
+exports.getTicketByID = getTicketById
+exports.getUsers = getUsers;
+exports.getUserByID = getUserById;
+exports.updateSchedule = updateSchedule;
+exports.updateUser = updateUser;
