@@ -1,34 +1,36 @@
-const express=require('express');
-const bodyParser=require('body-parser');
-const mongoMovie=require('./mongoose');
-const app=express();
-app.use(bodyParser.json());
-// MOVIE ENDPOINTS
-app.post('/movie/add', mongoMovie.addMovie);
-app.get('/movie', mongoMovie.getMovies);
-app.get('/movie/:id', mongoMovie.getMovieById)
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+mongoose
+  .connect("mongodb://localhost:27017")
+  .then(() => {
+    console.log("Connection establised!");
+  })
+  .catch(() => {
+    console.log("Connection failed!");
+  });
 
+const userRouter = require("./routes/users");
+const movieRouter = require("./routes/movies");
+const scheduleRouter = require("./routes/schedules");
+const ticketRouter = require("./routes/tickets");
+const screenRouter = require("./routes/screens");
+const app = express();
+app.use(bodyParser.json());
+
+// MOVIE ENDPOINTS
+app.use("/movie", movieRouter);
 
 // Schedule Endpoints
-app.post('/schedule/add', mongoMovie.addSchedule);
-app.get('/schedule', mongoMovie.getSchedules);
-app.get('/schedule/:id', mongoMovie.getScheduleById);
+app.use("/schedule", scheduleRouter);
 
 // User Endpoints
-app.post('/user/add', mongoMovie.addUser);
-app.get('/user', mongoMovie.getUsers);
-app.get('/user/:id', mongoMovie.getUserByID);
-app.put('/user/:id', mongoMovie.updateUser);
+app.use("/user", userRouter);
 
 // Ticket Endpoints
-app.post('/ticket/add', mongoMovie.addTicket);
-app.get('/ticket', mongoMovie.getTickets);
-app.get('/ticket/:id', mongoMovie.getTicketByID);
+app.use("/ticket", ticketRouter);
 
 // Screen Endpoints
-app.post('/screen/add', mongoMovie.addScreen);
-app.get('/screen', mongoMovie.getScreens);
-app.get('/screen/:id', mongoMovie.getScreenByID);
-
+app.use("/screen", screenRouter);
 
 app.listen(5000);
