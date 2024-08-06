@@ -1,5 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+
 const mongoose = require("mongoose");
 mongoose
   .connect("mongodb://localhost:27017")
@@ -15,9 +19,46 @@ const movieRouter = require("./routes/movies");
 const scheduleRouter = require("./routes/schedules");
 const ticketRouter = require("./routes/tickets");
 const screenRouter = require("./routes/screens");
+
+const options = {
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      title: "Globsyn Theatres API",
+      description: `API for managing Globsyn Theatres online ticket booking system
+
+Contacts:
+- Adrita Chatterjee: adritachatterji@gmail.com
+- Anamitra Chandra: 
+- Souraajit Samanta: 
+- Srinjay Das Gupta: dasguptasrinjay2004@gmail.com, https://www.srinjaydg.in`,
+      contact: {
+        name: "Srinjay Das Gupta",
+        email: "dasguptasrinjay2004@gmail.com",
+        url: "https://www.srinjaydg.in",
+      },
+      license: {
+        name: "MIT License",
+        url: "https://opensource.org/licenses/MIT",
+      },
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:5000",
+        description: "Development server",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJsDoc(options);
+
 const app = express();
 app.use(bodyParser.json());
-
+app.use(cors());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 // MOVIE ENDPOINTS
 app.use("/movie", movieRouter);
 
