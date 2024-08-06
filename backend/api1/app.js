@@ -29,13 +29,12 @@ const options = {
 
 Contacts:
 - Adrita Chatterjee: adritachatterji@gmail.com
-- Anamitra Chandra: 
-- Souraajit Samanta: 
+- Anamitra Chandra: anamitrachandra18@gmail.com
+- Souraajit Samanta: samantasouraajit@gmail.com
 - Srinjay Das Gupta: dasguptasrinjay2004@gmail.com, https://www.srinjaydg.in`,
       contact: {
         name: "Srinjay Das Gupta",
         email: "dasguptasrinjay2004@gmail.com",
-        url: "https://www.srinjaydg.in",
       },
       license: {
         name: "MIT License",
