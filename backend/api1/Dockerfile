@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 5000
 
 # Start the server with nodemon
-CMD ["npx", "nodemon", "app.js"]
+CMD ["npm", "start"]

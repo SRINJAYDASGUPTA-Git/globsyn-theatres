@@ -1,11 +1,11 @@
-version: '3.9'
-
 services:
   mongo:
     image: mongo:latest
     container_name: mongodb
     ports:
       - '27017:27017'
+    networks:
+      - globsyn-network
     volumes:
       - mongo_data:/data/db
 
@@ -16,9 +16,10 @@ services:
     command: npm start
     volumes:
       - ./backend/api1:/app
-      - /app/node_modules
     ports:
       - '5000:5000'
+    networks:
+      - globsyn-network
     depends_on:
       - mongo
 
@@ -29,11 +30,16 @@ services:
     command: npm start
     volumes:
       - ./frontend/cinebook:/app
-      - /app/node_modules
     ports:
       - '4200:4200'
+    networks:
+      - globsyn-network
     depends_on:
       - backend
 
 volumes:
   mongo_data:
+
+networks:
+  globsyn-network:
+    driver: bridge
