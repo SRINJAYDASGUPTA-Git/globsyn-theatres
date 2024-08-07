@@ -61,6 +61,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 // MOVIE ENDPOINTS
 app.use("/movie", movieRouter);
 
