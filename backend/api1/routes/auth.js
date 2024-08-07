@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 const SECRET_KEY = process.env.SECRET_KEY;
-console.log(SECRET_KEY);
 
 /**
  * @swagger
@@ -156,16 +155,18 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  let existingUser
   try {
-    const existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email: email });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
   if (!existingUser) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
+  let isPasswordCorrect
   try {
-    const isPasswordCorrect = await existingUser.comparePassword(password);
+    isPasswordCorrect = await existingUser.comparePassword(password);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -173,9 +174,9 @@ router.post("/login", async (req, res) => {
   if (!isPasswordCorrect) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
-
+  let token
   try {
-    const token = jwt.sign(
+    token = jwt.sign(
       {
         userId: existingUser.id,
         email: existingUser.email,
