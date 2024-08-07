@@ -1,0 +1,2 @@
+# Ignore .env.local file
+.env.local

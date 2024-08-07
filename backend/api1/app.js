@@ -9,9 +9,9 @@ const USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
 
 mongoose
-  .connect(`mongodb://${USERNAME}:${PASSWORD}@localhost:27017`)
+  .connect(`mongodb://localhost:27017`)
   .then(() => {
-    console.log("Connection establised!");
+    console.log("Connection established!");
   })
   .catch(() => {
     console.log("Connection failed!");
