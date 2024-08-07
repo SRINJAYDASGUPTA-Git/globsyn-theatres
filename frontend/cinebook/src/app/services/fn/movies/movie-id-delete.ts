@@ -12,7 +12,7 @@ export interface MovieIdDelete$Params {
 /**
  * ID of the movie
  */
-  id: string;
+  id: any;
 }
 
 export function movieIdDelete(http: HttpClient, rootUrl: string, params: MovieIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

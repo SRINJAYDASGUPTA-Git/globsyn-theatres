@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface UserResponse {
+export interface RegisterRequest {
 
   /**
    * Email of the user
@@ -8,17 +8,12 @@ export interface UserResponse {
   email: string;
 
   /**
-   * Auto-generated unique identifier
-   */
-  id?: string;
-
-  /**
    * Name of the user
    */
   name: string;
 
   /**
-   * Hashed Password of the user
+   * Password of the user
    */
   password: string;
 
@@ -26,5 +21,4 @@ export interface UserResponse {
    * Phone number of the user
    */
   phone: string;
-  tickets?: Array<string>;
 }

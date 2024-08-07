@@ -13,7 +13,7 @@ export interface MovieIdPut$Params {
 /**
  * ID of the movie
  */
-  id: string;
+  id: any;
       body: Movie
 }
 

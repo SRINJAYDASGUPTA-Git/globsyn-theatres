@@ -3,11 +3,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
-require('dotenv').config()
+require('dotenv').config({
+  path: './.env.local'
+})
 const mongoose = require("mongoose");
 const USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
-
+console.log(USERNAME);
 mongoose
   .connect(`mongodb://localhost:27017`)
   .then(() => {
@@ -22,6 +24,7 @@ const movieRouter = require("./routes/movies");
 const scheduleRouter = require("./routes/schedules");
 const ticketRouter = require("./routes/tickets");
 const screenRouter = require("./routes/screens");
+const authRouter = require("./routes/auth");
 
 const options = {
   definition: {
@@ -61,6 +64,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+// AUTH ENDPOINTS
+app.use("/auth", authRouter);
 
 // MOVIE ENDPOINTS
 app.use("/movie", movieRouter);

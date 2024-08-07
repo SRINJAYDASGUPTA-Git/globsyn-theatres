@@ -1,0 +1,1373 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Globsyn Theatres API",
+    "description": "API for managing Globsyn Theatres online ticket booking system\n\nContacts:\n- Adrita Chatterjee: adritachatterji@gmail.com\n- Anamitra Chandra: anamitrachandra18@gmail.com\n- Souraajit Samanta: samantasouraajit@gmail.com\n- Srinjay Das Gupta: dasguptasrinjay2004@gmail.com, https://www.srinjaydg.in",
+    "contact": {
+      "name": "Srinjay Das Gupta",
+      "email": "dasguptasrinjay2004@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login a user",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logged in successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/movie": {
+      "get": {
+        "summary": "Retrieve a list of movies",
+        "tags": [
+          "Movies"
+        ],
+        "description": "Retrieve a list of movies from the database",
+        "responses": {
+          "200": {
+            "description": "A list of movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new movie to the database",
+        "tags": [
+          "Movies"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The movie was successfully added to the database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/movie/{id}": {
+      "get": {
+        "summary": "Retrieve a movie by ID",
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/movieId"
+          }
+        ],
+        "description": "Retrieve a list of movies from the database",
+        "responses": {
+          "200": {
+            "description": "The movie with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The movie with the specified ID was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a movie by ID",
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/movieId"
+          }
+        ],
+        "description": "Update a movie by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The movie was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The movie with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a movie by ID",
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/movieId"
+          }
+        ],
+        "description": "Delete a movie by ID",
+        "responses": {
+          "200": {
+            "description": "The movie was successfully deleted"
+          },
+          "404": {
+            "description": "The movie with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/schedule": {
+      "get": {
+        "summary": "Retrieve a list of schedules from the database",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Get a list of all schedules",
+        "responses": {
+          "200": {
+            "description": "A list of schedules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Schedule"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new schedule to the database",
+        "tags": [
+          "Schedules"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Schedule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The schedule was successfully added to the database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/schedule/{id}": {
+      "get": {
+        "summary": "Retrieve a schedule by ID",
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/scheduleId"
+          }
+        ],
+        "description": "Retrieve a specific schedule by ID",
+        "responses": {
+          "200": {
+            "description": "The schedule with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The schedule with the specified ID was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a schedule by ID",
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/scheduleId"
+          }
+        ],
+        "description": "Update a schedule by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Schedule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The schedule was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The schedule with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a schedule by ID",
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/scheduleId"
+          }
+        ],
+        "description": "Delete a schedule by ID",
+        "responses": {
+          "200": {
+            "description": "The schedule was successfully deleted"
+          },
+          "404": {
+            "description": "The schedule with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/screen": {
+      "get": {
+        "summary": "Retrieve a list of screens from the database",
+        "tags": [
+          "Screens"
+        ],
+        "description": "Get a list of all screens",
+        "responses": {
+          "200": {
+            "description": "A list of screens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Screen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new screen to the database",
+        "tags": [
+          "Screens"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Screen"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The screen was successfully added to the database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Screen"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/screen/{id}": {
+      "get": {
+        "summary": "Retrieve a screen by ID",
+        "tags": [
+          "Screens"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/screenId"
+          }
+        ],
+        "description": "Retrieve a specific screen by ID",
+        "responses": {
+          "200": {
+            "description": "The screen with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Screen"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The screen with the specified ID was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a screen by ID",
+        "tags": [
+          "Screens"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/screenId"
+          }
+        ],
+        "description": "Update a screen by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Screen"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The screen was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Screen"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The screen with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a screen by ID",
+        "tags": [
+          "Screens"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/screenId"
+          }
+        ],
+        "description": "Delete a screen by ID",
+        "responses": {
+          "200": {
+            "description": "The screen was successfully deleted"
+          },
+          "404": {
+            "description": "The screen with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/ticket": {
+      "get": {
+        "summary": "Retrieve a list of tickets from the database",
+        "tags": [
+          "Tickets"
+        ],
+        "description": "Get a list of all tickets",
+        "responses": {
+          "200": {
+            "description": "A list of tickets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TicketResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new ticket to the database",
+        "tags": [
+          "Tickets"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The ticket was successfully added to the database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/ticket/{id}": {
+      "get": {
+        "summary": "Retrieve a ticket by ID",
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ticketId"
+          }
+        ],
+        "description": "Retrieve a ticket from the database by its ID",
+        "responses": {
+          "200": {
+            "description": "The ticket with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The ticket with the specified ID was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a ticket by ID",
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ticketId"
+          }
+        ],
+        "description": "Update a ticket by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The ticket was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The ticket with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a ticket by ID",
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ticketId"
+          }
+        ],
+        "description": "Delete a ticket by ID",
+        "responses": {
+          "200": {
+            "description": "The ticket was successfully deleted"
+          },
+          "404": {
+            "description": "The ticket with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "summary": "Retrieve a list of users from the database",
+        "tags": [
+          "Users"
+        ],
+        "description": "Get a list of all users",
+        "responses": {
+          "200": {
+            "description": "A list of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "Retrieve a user by ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "description": "Retrieve a list of users from the database",
+        "responses": {
+          "200": {
+            "description": "The user with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The movie with the specified ID was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a user by ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "description": "Update an user by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The user was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an user by ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "description": "Delete a movie by ID",
+        "responses": {
+          "200": {
+            "description": "The user was successfully deleted"
+          },
+          "404": {
+            "description": "The user with the specified ID was not found"
+          },
+          "500": {
+            "description": "Some server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "phone",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number of the user"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user"
+          }
+        },
+        "example": {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "1234567890",
+          "password": "password"
+        }
+      },
+      "AuthenticationResponse": {
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "JWT token for authentication"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message for the user"
+          }
+        },
+        "example": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU0OWIwMTIwMWUyZjMz",
+          "message": "User created successfully"
+        }
+      },
+      "AuthenticationRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email of the user"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user"
+          }
+        },
+        "example": {
+          "email": "john.doe@example.com",
+          "password": "password"
+        }
+      },
+      "Movie": {
+        "type": "object",
+        "required": [
+          "name",
+          "duration",
+          "genre",
+          "rel_date",
+          "cast",
+          "director",
+          "imdb_rating",
+          "poster",
+          "language"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the movie"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Duration of the movie in minutes"
+          },
+          "genre": {
+            "type": "string",
+            "description": "Genre of the movie"
+          },
+          "rel_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Release date of the movie"
+          },
+          "cast": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Cast of the movie"
+          },
+          "director": {
+            "type": "string",
+            "description": "Director of the movie"
+          },
+          "imdb_rating": {
+            "type": "number",
+            "description": "IMDb rating of the movie"
+          },
+          "poster": {
+            "type": "string",
+            "description": "URL of the movie poster"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language of the movie"
+          }
+        },
+        "example": {
+          "name": "The Shawshank Redemption",
+          "duration": 142,
+          "genre": "Drama",
+          "rel_date": "1994-09-23",
+          "cast": [
+            "Tim Robbins",
+            "Morgan Freeman"
+          ],
+          "director": "Frank Darabont",
+          "imdb_rating": 9.3,
+          "poster": "https://example.com/shawshank_redemption.jpg",
+          "language": "English"
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "required": [
+          "date",
+          "start_time",
+          "end_time",
+          "movie",
+          "screen"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the schedule"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "time",
+            "description": "Start time of the schedule"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "time",
+            "description": "End time of the schedule"
+          },
+          "movie": {
+            "type": "string",
+            "description": "ID of the Movie associated with the schedule"
+          },
+          "screen": {
+            "type": "string",
+            "description": "ID of the screen associated with the schedule"
+          }
+        },
+        "example": {
+          "id": "9b8c7d6e5f4a3c2d1e0f9a8b",
+          "date": "2023-12-01",
+          "start_time": "18:00",
+          "end_time": "20:30",
+          "movie": "4a2d6c1f3e78a9b123c456d7",
+          "screen": "7f8e9b2d3c4a5d6e7f8a9b0c"
+        }
+      },
+      "SeatRange": {
+        "type": "object",
+        "required": [
+          "type",
+          "startRow",
+          "startNumber",
+          "endRow",
+          "endNumber"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of seat range"
+          },
+          "startRow": {
+            "type": "string",
+            "description": "Starting row of the seat range"
+          },
+          "startNumber": {
+            "type": "number",
+            "description": "Starting seat number of the seat range"
+          },
+          "endRow": {
+            "type": "string",
+            "description": "Ending row of the seat range"
+          },
+          "endNumber": {
+            "type": "number",
+            "description": "Ending seat number of the seat range"
+          }
+        },
+        "example": {
+          "type": "VIP",
+          "startRow": "A",
+          "startNumber": 1,
+          "endRow": "A",
+          "endNumber": 10
+        }
+      },
+      "Screen": {
+        "type": "object",
+        "required": [
+          "screenNumber",
+          "totalSeats",
+          "seatLayout"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "screenNumber": {
+            "type": "number",
+            "description": "Number of the screen"
+          },
+          "totalSeats": {
+            "type": "number",
+            "description": "Total number of seats"
+          },
+          "seatLayout": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeatRange"
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the screen"
+          }
+        },
+        "example": {
+          "screenNumber": 1,
+          "totalSeats": 200,
+          "seatLayout": [
+            {
+              "type": "Regular",
+              "startRow": "A",
+              "startNumber": 1,
+              "endRow": "E",
+              "endNumber": 20
+            }
+          ],
+          "description": "Main screen with regular and VIP seats"
+        }
+      },
+      "TicketRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "date",
+          "time",
+          "movie",
+          "schedule",
+          "screen",
+          "seat",
+          "seatType",
+          "price"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the ticket holder or event"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the event"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time of the event in HH:mm format"
+          },
+          "movie": {
+            "type": "string",
+            "description": "ID of the movie"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "ID of the schedule"
+          },
+          "screen": {
+            "type": "number",
+            "description": "Screen number"
+          },
+          "seat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of seat numbers"
+          },
+          "seatType": {
+            "type": "string",
+            "description": "Type of seat (e.g., regular, VIP)"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the ticket"
+          }
+        },
+        "example": {
+          "name": "John Doe",
+          "date": "2024-08-10",
+          "time": "19:30",
+          "movie": "60c72b2f9e7d3c001f1d1d6f",
+          "schedule": "60c72b2f9e7d3c001f1d1d6f",
+          "screen": 1,
+          "seat": [
+            "A12",
+            "A13"
+          ],
+          "seatType": "VIP",
+          "price": 25
+        }
+      },
+      "TicketResponse": {
+        "type": "object",
+        "required": [
+          "name",
+          "date",
+          "time",
+          "movie",
+          "schedule",
+          "screen",
+          "seat",
+          "seatType",
+          "price"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the ticket holder or event"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the event"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time of the event in HH:mm format"
+          },
+          "movie": {
+            "type": "string",
+            "description": "ID of the movie"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "ID of the schedule"
+          },
+          "screen": {
+            "type": "number",
+            "description": "Screen number"
+          },
+          "seat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of seat numbers"
+          },
+          "seatType": {
+            "type": "string",
+            "description": "Type of seat (e.g., regular, VIP)"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the ticket"
+          }
+        },
+        "example": {
+          "id": "60c72b2f9e7d3c001f1d1d6f",
+          "name": "John Doe",
+          "date": "2024-08-10",
+          "time": "19:30",
+          "movie": "60c72b2f9e7d3c001f1d1d6f",
+          "schedule": "60c72b2f9e7d3c001f1d1d6f",
+          "screen": 1,
+          "seat": [
+            "A12",
+            "A13"
+          ],
+          "seatType": "VIP",
+          "price": 25
+        }
+      },
+      "UserRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "phone",
+          "password"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number of the user"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user"
+          }
+        },
+        "example": {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "1234567890",
+          "password": "password"
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "phone",
+          "password"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Auto-generated unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number of the user"
+          },
+          "password": {
+            "type": "string",
+            "description": "Hashed Password of the user"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Ticket IDs"
+            }
+          }
+        },
+        "example": {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "1234567890",
+          "password": "$2b$10$olHovuYBAwJm74.8Xe2Ku.hkdrB8F7PvJgHigNEO.PNcXOW1eSmze",
+          "tickets": [
+            "60b9b3b3b3b3b3b3b3b3b3b3",
+            "60b9b3b3b3b3b3b3b3b3b3"
+          ]
+        }
+      }
+    },
+    "parameters": {
+      "movieId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID of the movie",
+        "required": true
+      },
+      "scheduleId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID of the schedule",
+        "required": true
+      },
+      "screenId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID of the screen",
+        "required": true
+      },
+      "ticketId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID of the ticket",
+        "required": true
+      },
+      "userId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID of the user",
+        "required": true
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "APIs for user authentication"
+    },
+    {
+      "name": "Movies",
+      "description": "API for movies in the database"
+    },
+    {
+      "name": "Schedules",
+      "description": "API for managing movie schedules"
+    },
+    {
+      "name": "Screens",
+      "description": "API for managing movie screens"
+    },
+    {
+      "name": "Tickets",
+      "description": "API for tickets in the system"
+    },
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ export interface ScreenIdPut$Params {
 /**
  * ID of the screen
  */
-  id: string;
+  id: any;
       body: Screen
 }
 

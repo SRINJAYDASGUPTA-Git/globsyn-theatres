@@ -13,7 +13,7 @@ export interface TicketIdGet$Params {
 /**
  * ID of the ticket
  */
-  id: string;
+  id: any;
 }
 
 export function ticketIdGet(http: HttpClient, rootUrl: string, params: TicketIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<TicketResponse>> {

@@ -13,7 +13,7 @@ export interface ScheduleIdPut$Params {
 /**
  * ID of the schedule
  */
-  id: string;
+  id: any;
       body: Schedule
 }
 

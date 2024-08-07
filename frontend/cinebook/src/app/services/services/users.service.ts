@@ -17,8 +17,6 @@ import { userIdGet } from '../fn/users/user-id-get';
 import { UserIdGet$Params } from '../fn/users/user-id-get';
 import { userIdPut } from '../fn/users/user-id-put';
 import { UserIdPut$Params } from '../fn/users/user-id-put';
-import { userPost } from '../fn/users/user-post';
-import { UserPost$Params } from '../fn/users/user-post';
 import { UserResponse } from '../models/user-response';
 
 
@@ -61,39 +59,6 @@ export class UsersService extends BaseService {
   userGet(params?: UserGet$Params, context?: HttpContext): Observable<Array<UserResponse>> {
     return this.userGet$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<UserResponse>>): Array<UserResponse> => r.body)
-    );
-  }
-
-  /** Path part for operation `userPost()` */
-  static readonly UserPostPath = '/user';
-
-  /**
-   * Add a new user to the database.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `userPost()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  userPost$Response(params: UserPost$Params, context?: HttpContext): Observable<StrictHttpResponse<UserResponse>> {
-    return userPost(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Add a new user to the database.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `userPost$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  userPost(params: UserPost$Params, context?: HttpContext): Observable<UserResponse> {
-    return this.userPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UserResponse>): UserResponse => r.body)
     );
   }
 

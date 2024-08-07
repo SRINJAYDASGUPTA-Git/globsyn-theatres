@@ -12,7 +12,7 @@ export interface TicketIdDelete$Params {
 /**
  * ID of the ticket
  */
-  id: string;
+  id: any;
 }
 
 export function ticketIdDelete(http: HttpClient, rootUrl: string, params: TicketIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

@@ -12,7 +12,7 @@ export interface ScreenIdDelete$Params {
 /**
  * ID of the screen
  */
-  id: string;
+  id: any;
 }
 
 export function screenIdDelete(http: HttpClient, rootUrl: string, params: ScreenIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

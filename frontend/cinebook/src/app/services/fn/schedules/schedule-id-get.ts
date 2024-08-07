@@ -13,7 +13,7 @@ export interface ScheduleIdGet$Params {
 /**
  * ID of the schedule
  */
-  id: string;
+  id: any;
 }
 
 export function scheduleIdGet(http: HttpClient, rootUrl: string, params: ScheduleIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Schedule>> {

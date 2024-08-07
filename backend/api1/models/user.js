@@ -23,6 +23,15 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  tickets: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ticket'
+  }],
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
   }
 });
 

@@ -6,22 +6,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { TicketRequest } from '../../models/ticket-request';
-import { TicketResponse } from '../../models/ticket-response';
+import { AuthenticationRequest } from '../../models/authentication-request';
+import { AuthenticationResponse } from '../../models/authentication-response';
 
-export interface TicketIdPut$Params {
-
-/**
- * ID of the ticket
- */
-  id: any;
-      body: TicketRequest
+export interface AuthLoginPost$Params {
+      body: AuthenticationRequest
 }
 
-export function ticketIdPut(http: HttpClient, rootUrl: string, params: TicketIdPut$Params, context?: HttpContext): Observable<StrictHttpResponse<TicketResponse>> {
-  const rb = new RequestBuilder(rootUrl, ticketIdPut.PATH, 'put');
+export function authLoginPost(http: HttpClient, rootUrl: string, params: AuthLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
+  const rb = new RequestBuilder(rootUrl, authLoginPost.PATH, 'post');
   if (params) {
-    rb.path('id', params.id, {});
     rb.body(params.body, 'application/json');
   }
 
@@ -30,9 +24,9 @@ export function ticketIdPut(http: HttpClient, rootUrl: string, params: TicketIdP
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<TicketResponse>;
+      return r as StrictHttpResponse<AuthenticationResponse>;
     })
   );
 }
 
-ticketIdPut.PATH = '/ticket/{id}';
+authLoginPost.PATH = '/auth/login';

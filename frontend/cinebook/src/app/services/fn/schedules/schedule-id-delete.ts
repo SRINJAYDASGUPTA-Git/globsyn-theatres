@@ -12,7 +12,7 @@ export interface ScheduleIdDelete$Params {
 /**
  * ID of the schedule
  */
-  id: string;
+  id: any;
 }
 
 export function scheduleIdDelete(http: HttpClient, rootUrl: string, params: ScheduleIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

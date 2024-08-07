@@ -13,7 +13,7 @@ export interface MovieIdGet$Params {
 /**
  * ID of the movie
  */
-  id: string;
+  id: any;
 }
 
 export function movieIdGet(http: HttpClient, rootUrl: string, params: MovieIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Movie>> {

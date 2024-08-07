@@ -13,7 +13,7 @@ export interface UserIdGet$Params {
 /**
  * ID of the user
  */
-  id: string;
+  id: any;
 }
 
 export function userIdGet(http: HttpClient, rootUrl: string, params: UserIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<UserResponse>> {

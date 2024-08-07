@@ -13,7 +13,7 @@ export interface ScreenIdGet$Params {
 /**
  * ID of the screen
  */
-  id: string;
+  id: any;
 }
 
 export function screenIdGet(http: HttpClient, rootUrl: string, params: ScreenIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Screen>> {

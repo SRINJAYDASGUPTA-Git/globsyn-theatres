@@ -57,11 +57,21 @@ const User = require("../models/user");
  *         password:
  *           type: string
  *           description: Hashed Password of the user
+ *         tickets:
+ *           type: array
+ *           items:
+ *            type: string
+ *            description: Ticket IDs
  *       example:
  *         name: "John Doe"
  *         email: "john.doe@example.com"
  *         phone: "1234567890"
  *         password: "$2b$10$olHovuYBAwJm74.8Xe2Ku.hkdrB8F7PvJgHigNEO.PNcXOW1eSmze"
+ *         tickets: [
+ *          "60b9b3b3b3b3b3b3b3b3b3b3",
+ *          "60b9b3b3b3b3b3b3b3b3b3"
+ *         ]
+ * 
  *   parameters:
  *     userId:
  *       name: id
@@ -131,51 +141,6 @@ router.get("/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-/**
- * @swagger
- * /user:
- *   post:
- *     summary: Add a new user to the database
- *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:  
- *             $ref: '#/components/schemas/UserRequest'
- *     responses:
- *       201:
- *         description: The movie was successfully added to the database
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/UserResponse'
- *       500:
- *         description: Some server error 
- */
-
-router.post("/", async (req, res) => {
-  const { name, email, phone, password } = req.body;
-  const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
-  if (existingUser) {
-    return res
-      .status(400)
-      .json({ message: "Email or phone number already exists" });
-  }
-  try {
-    const newUser = new User({
-      name,
-      email,
-      phone,
-      password,
-    });
-    const result = await newUser.save();
-    res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

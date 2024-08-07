@@ -14,7 +14,7 @@ export interface UserIdPut$Params {
 /**
  * ID of the user
  */
-  id: string;
+  id: any;
       body: UserRequest
 }
 

@@ -12,7 +12,7 @@ export interface UserIdDelete$Params {
 /**
  * ID of the user
  */
-  id: string;
+  id: any;
 }
 
 export function userIdDelete(http: HttpClient, rootUrl: string, params: UserIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
