@@ -11,7 +11,7 @@ const USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
 console.log(USERNAME);
 mongoose
-  .connect(`mongodb://localhost:27017`)
+  .connect(`mongodb://mongodb:27017`)
   .then(() => {
     console.log("Connection established!");
   })
