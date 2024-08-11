@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './services/services';
 import { UserResponse } from './services/models';
+import { initFlowbite } from 'flowbite';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getUsers();
+    initFlowbite();
   }
   title = 'cinebook';
 
