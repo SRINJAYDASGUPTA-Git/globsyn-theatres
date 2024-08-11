@@ -11,6 +11,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,7 @@ import { RegisterComponent } from './pages/register/register.component';
     LoginComponent,
     NavbarComponent,
     DrawerComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

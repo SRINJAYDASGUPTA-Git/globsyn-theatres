@@ -1,1 +1,16 @@
 <app-navbar></app-navbar>
+<div *ngIf="movies.length > 0; else noMovies">
+    <h2>Recent Movies</h2>
+    <ul>
+      <li *ngFor="let movie of movies">
+        <h3>{{ movie.name }}</h3>
+        <p>{{ movie.director}}</p>
+        <p><strong>IMDB RATING:</strong> {{ movie.imdb_rating }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noMovies>
+    <p>No recent movies found.</p>
+  </ng-template>
+  
