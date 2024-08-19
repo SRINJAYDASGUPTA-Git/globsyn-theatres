@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Movie } from '../../services/models';
-import { movieGet } from '../../services/fn/movies/movie-get';
 import { MoviesService } from '../../services/services';
 
 @Component({
