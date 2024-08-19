@@ -7,11 +7,14 @@ require('dotenv').config({
   path: './.env.local'
 })
 const mongoose = require("mongoose");
-const USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
-const PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const USERNAME = process.env.MONGO_ROOT_USERNAME;
+const PASSWORD = process.env.MONGO_ROOT_PASSWORD;
 console.log(USERNAME);
 mongoose
-  .connect(`mongodb://mongodb:27017`)
+  .connect(`mongodb+srv://${USERNAME}:${PASSWORD}@cinebook-cluster.gz64z.mongodb.net/?retryWrites=true&w=majority&appName=cinebook-cluster`, {
+    dbName: "cinebook",
+    bufferCommands: false,
+  })
   .then(() => {
     console.log("Connection established!");
   })
