@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RegisterComponent } from './pages/register/register.component';
     NavbarComponent,
     DrawerComponent,
     RegisterComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
