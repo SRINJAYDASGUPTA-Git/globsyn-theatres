@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     .subscribe(
       (response) => {
         this.users = response;
-        console.log(this.users);
+        
       },
       (error) => {
         console.error('Error fetching users:', error);
