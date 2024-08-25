@@ -11,12 +11,8 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { CardComponent } from './components/card/card.component';
-<<<<<<< HEAD
 import { TicketComponent } from './pages/ticket/ticket.component';
-=======
 import { HttpTokenInterceptor } from './services/interceptor/http-token.interceptor';
->>>>>>> 92b5f8274815b9b6987f5737e9e663e5da35b2de
-
 
 @NgModule({
   declarations: [
