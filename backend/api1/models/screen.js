@@ -6,7 +6,9 @@ const seatRangeSchema = new mongoose.Schema({
   startRow: { type: String, required: true }, 
   startNumber: { type: Number, required: true }, 
   endRow: { type: String, required: true }, 
-  endNumber: { type: Number, required: true } 
+  endNumber: { type: Number, required: true },
+  
+  filled: {type: Number, required: false, default: 0}
 });
 
 const screenSchema = new mongoose.Schema({
