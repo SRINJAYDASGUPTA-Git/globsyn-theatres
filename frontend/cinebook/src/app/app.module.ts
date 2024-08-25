@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -11,7 +11,11 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { CardComponent } from './components/card/card.component';
+<<<<<<< HEAD
 import { TicketComponent } from './pages/ticket/ticket.component';
+=======
+import { HttpTokenInterceptor } from './services/interceptor/http-token.interceptor';
+>>>>>>> 92b5f8274815b9b6987f5737e9e663e5da35b2de
 
 
 @NgModule({
@@ -31,7 +35,14 @@ import { TicketComponent } from './pages/ticket/ticket.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpTokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
