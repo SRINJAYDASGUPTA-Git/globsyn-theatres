@@ -1,14 +1,17 @@
 <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white m-4">
-    <img class="w-full" [src]="movie.imageUrl" alt="{{ movie.name }}">
+    <img class="w-full" [src]="movie.poster" alt="{{ movie.name }}">
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ movie.name }}</div>
       <p class="text-gray-700 text-base">{{ movie.director }}</p>
-      <p class="text-gray-700 text-sm"><strong>IMDB Rating:</strong> {{ movie.imdb_rating }}</p>
+      <p class="text-gray-700 text-sm flex gap-2">
+        <strong>IMDB Rating:</strong>
+        <app-rating [rating]="movie.imdb_rating"></app-rating>
+        {{movie.imdb_rating}}
+      </p>
     </div>
     <div class="px-6 pt-4 pb-2">
-      <a href="/ticket" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <a [routerLink]="'ticket/' + movie._id" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Book Now
       </a>
     </div>
   </div>
-  

@@ -25,7 +25,7 @@ export interface Movie {
   /**
    * Auto-generated unique identifier
    */
-  id?: string;
+  _id?: string;
 
   /**
    * IMDb rating of the movie

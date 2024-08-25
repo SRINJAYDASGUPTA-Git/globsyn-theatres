@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface Schedule {
+export interface  Schedule {
 
   /**
    * Date of the schedule
@@ -15,7 +15,7 @@ export interface Schedule {
   /**
    * Auto-generated unique identifier
    */
-  id?: string;
+  _id?: string;
 
   /**
    * ID of the Movie associated with the schedule

@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   getrecentmovies(): void {
     this.movieService.movieGet().subscribe((movies) => {
       this.movies = movies;
+      console.log(this.movies);
     });
   }
 

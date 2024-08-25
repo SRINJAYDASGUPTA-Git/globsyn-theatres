@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { CardComponent } from './components/card/card.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
-import { HttpTokenInterceptor } from './services/interceptor/http-token.interceptor';
+import { RatingComponent } from './components/rating/rating.component';
 
 
 @NgModule({
@@ -25,6 +25,7 @@ import { HttpTokenInterceptor } from './services/interceptor/http-token.intercep
     RegisterComponent,
     CardComponent,
     TicketComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,12 +34,6 @@ import { HttpTokenInterceptor } from './services/interceptor/http-token.intercep
     FormsModule
   ],
   providers: [
-    HttpClient,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpTokenInterceptor,
-      multi: true
-    }
   ],
   bootstrap: [AppComponent]
 })

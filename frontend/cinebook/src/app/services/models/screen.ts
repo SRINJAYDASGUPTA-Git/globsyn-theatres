@@ -11,7 +11,7 @@ export interface Screen {
   /**
    * Auto-generated unique identifier
    */
-  id?: string;
+  _id?: string;
 
   /**
    * Number of the screen

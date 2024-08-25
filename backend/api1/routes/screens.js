@@ -136,6 +136,7 @@ router.get("/:id", async (req, res) => {
     if (!screen) {
       return res.status(404).json({ message: "Screen not found" });
     }
+    console.log(screen);
     res.status(200).json(screen);
   } catch (error) {
     res.status(500).json({ message: error.message });
