@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -6,5 +7,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  @Input() movie: any; // This will accept movie data from the parent component
+  @Input() movie: any;
+  constructor(
+    private router:Router
+  ){}
+
+  onBookNow(movieId: string) {
+    this.router.navigate(['/ticket', movieId]);
+  }
+  
 }

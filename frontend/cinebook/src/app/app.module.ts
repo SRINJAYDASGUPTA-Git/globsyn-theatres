@@ -11,6 +11,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { CardComponent } from './components/card/card.component';
+import { TicketComponent } from './pages/ticket/ticket.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CardComponent } from './components/card/card.component';
     DrawerComponent,
     RegisterComponent,
     CardComponent,
+    TicketComponent,
   ],
   imports: [
     BrowserModule,
