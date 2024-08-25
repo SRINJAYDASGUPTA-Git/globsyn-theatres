@@ -14,7 +14,6 @@ import { CardComponent } from './components/card/card.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
 import { RatingComponent } from './components/rating/rating.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
