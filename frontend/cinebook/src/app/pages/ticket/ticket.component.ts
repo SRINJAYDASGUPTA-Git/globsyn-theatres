@@ -51,22 +51,28 @@ export class TicketComponent implements OnInit {
     // Retrieve movieId from the route
     this.movieId = this.route.snapshot.paramMap.get('id') || '';
     if (this.movieId) {
-      // Fetch the schedule using the movieId
-      this.movieService.movieIdGet({id: this.movieId}).subscribe(movie => {
+      // Fetch the movie using the movieId
+      this.movieService.movieIdGet({ id: this.movieId }).subscribe(movie => {
         this.movie = movie;
       });
+  
+      // Fetch the schedules and then the screen
       this.scheduleService.scheduleGet().subscribe(schedules => {
-        console.log(schedules);
         this.schedules = schedules.filter(schedule => schedule.movie === this.movieId);
+  
+        // Fetch the screen only if schedules are available
+        if (this.schedules.length > 0) {
+          this.screenService.screenIdGet({ id: this.schedules[0].screen }).subscribe({
+            next: (screen) => {
+              console.log('Screen data:', screen); // Should log the screen object
+              this.screen = screen; // Assign screen data to the component property
+            },
+            error: (err) => {
+              console.error('Error:', err);
+            }
+          });
+        }
       });
     }
-    this.screenService.screenIdGet({ id: this.schedules[0].screen }).subscribe({
-      next: (screen) => {
-        console.log(screen); // Ensure this is not being treated as an array
-      },
-      error: (err) => {
-        console.error('Error:', err);
-      }
-    });
   }
-}
+}  
