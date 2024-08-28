@@ -18,6 +18,7 @@ const Ticket = require("../models/ticket");
  *         - seat
  *         - seatType
  *         - price
+ *         - tickets
  *       properties:
  *         id:
  *           type: string
@@ -52,6 +53,9 @@ const Ticket = require("../models/ticket");
  *         price:
  *           type: number
  *           description: Price of the ticket
+ *         tickets:
+ *           type: number
+ *           description: Number of tickets
  *       example:
  *         name: "John Doe"
  *         date: "2024-08-10"
@@ -74,6 +78,7 @@ const Ticket = require("../models/ticket");
  *         - seat
  *         - seatType
  *         - price
+ *         - tickets
  *       properties:
  *         id:
  *           type: string
@@ -108,6 +113,9 @@ const Ticket = require("../models/ticket");
  *         price:
  *           type: number
  *           description: Price of the ticket
+ *         tickets:
+ *           type: number   
+ *           description: Number of tickets
  *       example:
  *         id: "60c72b2f9e7d3c001f1d1d6f"
  *         name: "John Doe"
@@ -215,7 +223,7 @@ router.get("/:id", async (req, res) => {
  *         description: Some server error
  */
 router.post("/", async (req, res) => {
-  const { name, date, time, movie, schedule, screen, seat, seatType, price } = req.body;
+  const { name, date, time, movie, schedule, screen, seat, seatType, price, tickets } = req.body;
   try {
     const newTicket = new Ticket({
       name,
@@ -227,6 +235,7 @@ router.post("/", async (req, res) => {
       seat,
       seatType,
       price,
+      tickets
     });
     const result = await newTicket.save();
     res.status(201).json(result);

@@ -14,6 +14,7 @@ const Screen = require("../models/screen");
  *         - startNumber
  *         - endRow
  *         - endNumber
+ *         - filled
  *       properties:
  *         type:
  *           type: string
@@ -30,12 +31,16 @@ const Screen = require("../models/screen");
  *         endNumber:
  *           type: number
  *           description: Ending seat number of the seat range
+ *         filled:
+ *           type: number
+ *           description: Number of seats filled in the seat range
  *       example:
  *         type: "VIP"
  *         startRow: "A"
  *         startNumber: 1
  *         endRow: "A"
  *         endNumber: 10
+ *         filled: 5
  *     Screen:
  *       type: object
  *       required:
@@ -136,7 +141,6 @@ router.get("/:id", async (req, res) => {
     if (!screen) {
       return res.status(404).json({ message: "Screen not found" });
     }
-    console.log(screen);
     res.status(200).json(screen);
   } catch (error) {
     res.status(500).json({ message: error.message });

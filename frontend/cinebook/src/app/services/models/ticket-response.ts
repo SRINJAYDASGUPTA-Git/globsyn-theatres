@@ -10,7 +10,7 @@ export interface TicketResponse {
   /**
    * Auto-generated unique identifier
    */
-  id?: string;
+  _id?: string;
 
   /**
    * ID of the movie
@@ -46,6 +46,11 @@ export interface TicketResponse {
    * Type of seat (e.g., regular, VIP)
    */
   seatType: string;
+
+  /**
+   * Number of tickets
+   */
+  tickets: number;
 
   /**
    * Time of the event in HH:mm format

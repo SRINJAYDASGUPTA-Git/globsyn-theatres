@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface  Schedule {
+export interface Schedule {
 
   /**
    * Date of the schedule

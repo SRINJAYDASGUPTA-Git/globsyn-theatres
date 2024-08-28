@@ -126,10 +126,7 @@ export class ScreensService extends BaseService {
    */
   screenIdGet(params: ScreenIdGet$Params, context?: HttpContext): Observable<Screen> {
     return this.screenIdGet$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Screen>):Screen =>{
-        console.log('Raw response:', r.body);
-        return r.body;
-      }) // Ensure that only the body is returned
+      map((r: StrictHttpResponse<Screen>): Screen => r.body)
     );
   }
 

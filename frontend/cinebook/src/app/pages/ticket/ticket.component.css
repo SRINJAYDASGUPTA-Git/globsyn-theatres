@@ -1,0 +1,10 @@
+*{
+  @apply text-xl
+}
+.heading{
+  @apply text-3xl
+}
+
+input{
+  @apply border-transparent bg-slate-100 rounded-xl
+}

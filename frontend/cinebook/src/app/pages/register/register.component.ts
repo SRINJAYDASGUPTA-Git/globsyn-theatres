@@ -21,6 +21,7 @@ export class RegisterComponent {
     password: '',
     name: '',
     phone: '',
+    tickets: [],
   };
 
   register() {

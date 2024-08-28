@@ -1,7 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface TicketRequest {
-
   /**
    * Date of the event
    */
@@ -51,4 +50,9 @@ export interface TicketRequest {
    * Time of the event in HH:mm format
    */
   time: string;
+
+  /**
+   * Number of tickets
+   */
+  tickets: number;
 }

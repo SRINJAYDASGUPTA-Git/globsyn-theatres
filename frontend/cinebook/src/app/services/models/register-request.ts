@@ -21,4 +21,10 @@ export interface RegisterRequest {
    * Phone number of the user
    */
   phone: string;
+
+  /**
+   * List of ticket IDs
+   */
+
+  tickets: Array<string>;
 }

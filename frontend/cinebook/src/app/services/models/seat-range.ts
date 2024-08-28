@@ -13,6 +13,11 @@ export interface SeatRange {
   endRow: string;
 
   /**
+   * Number of seats filled in the seat range
+   */
+  filled: number;
+
+  /**
    * Starting seat number of the seat range
    */
   startNumber: number;

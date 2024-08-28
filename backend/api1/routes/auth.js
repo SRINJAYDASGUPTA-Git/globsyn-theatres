@@ -99,7 +99,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post("/register", async (req, res) => {
   const { name, email, phone, password } = req.body;
-  const user = new User({ name, email, phone, password });
+  const user = new User({ name, email, phone, password, tickets: []});
   try {
     await user.save();
   } catch (error) {

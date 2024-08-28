@@ -22,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'ticket/:id',
-    component: TicketComponent
+    component: TicketComponent,
+    canActivate: [authGuard]
   }
 
 ];

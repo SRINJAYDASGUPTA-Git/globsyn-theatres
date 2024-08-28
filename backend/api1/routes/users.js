@@ -175,7 +175,7 @@ router.get("/:id", async (req, res) => {
  */
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, email, phone, password } = req.body;
+  const { name, email, phone, password, tickets } = req.body;
   try {
     const user = await User.findById(id);
     if (!user) {
@@ -185,6 +185,7 @@ router.put("/:id", async (req, res) => {
     user.email = email || user.email;
     user.phone = phone || user.phone;
     user.password = password || user.password;
+    user.tickets = tickets || user.tickets;
     await user.save();
     res.status(200).json({ message: "User updated successfully", user });
   } catch (error) {
