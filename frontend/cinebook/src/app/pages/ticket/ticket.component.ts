@@ -18,11 +18,11 @@ export class TicketComponent implements OnInit {
   availableDates: string[] = [];
   availableTickets: number = 8;
   seatprice: { [key: string]: number } = {
-    "PLATINUM PLUS": 50,
-    "PLATINUM": 40,
-    "PLATINUM-1": 30,
-    "PLATINUM-2": 20,
-    "GOLD": 10
+    "PLATINUM PLUS": 300,
+    "PLATINUM": 250,
+    "PLATINUM-1": 200,
+    "PLATINUM-2": 150,
+    "GOLD": 100
   };
   user: any = {
     fullName: '',
@@ -179,17 +179,18 @@ export class TicketComponent implements OnInit {
       // Update seats array
 
     }
-
-    console.log(selectedSeatType);
+    this.calculatePrice();
+    // console.log(selectedSeatType);
   }
   calculatePrice() {
     const seatType = this.ticketRequest.seatType;
     const ticketCount = this.ticketRequest.tickets;
-    const seatPrice = this.seatprice[seatType]; 
-    this.ticketRequest.price = ticketCount * seatPrice; 
+    const seatPrice = this.seatprice[seatType];
+    var price = ticketCount * seatPrice;
+    price = price + (price * 0.18);
+    this.ticketRequest.price = price;
   }
   bookTicket() {
-    this.calculatePrice();
     for(let i = 1; i <= this.ticketRequest.tickets; i++){
         const selectedSeatType = this.screen.seatLayout.find(
           (seat) => seat.type === this.ticketRequest.seatType

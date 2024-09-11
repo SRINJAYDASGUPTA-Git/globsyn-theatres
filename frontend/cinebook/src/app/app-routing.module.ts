@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
 import { authGuard } from './services/guard/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -24,8 +25,12 @@ const routes: Routes = [
     path: 'ticket/:id',
     component: TicketComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
+    canActivate: [authGuard]
   }
-
 ];
 
 @NgModule({

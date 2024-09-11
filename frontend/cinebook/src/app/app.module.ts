@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CardComponent } from './components/card/card.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RatingComponent } from './components/rating/rating.component';
     RegisterComponent,
     CardComponent,
     TicketComponent,
-    RatingComponent
+    RatingComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
