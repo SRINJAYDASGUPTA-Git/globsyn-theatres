@@ -17,6 +17,13 @@ import { DecoderService } from '../../services/decoder/decoder.service';
 export class TicketComponent implements OnInit {
   availableDates: string[] = [];
   availableTickets: number = 8;
+  seatprice: { [key: string]: number } = {
+    "PLATINUM PLUS": 50,
+    "PLATINUM": 40,
+    "PLATINUM-1": 30,
+    "PLATINUM-2": 20,
+    "GOLD": 10
+  };
   user: any = {
     fullName: '',
     email: '',
@@ -174,6 +181,12 @@ export class TicketComponent implements OnInit {
     }
 
     console.log(selectedSeatType);
+  }
+  calculatePrice() {
+    const seatType = this.ticketRequest.seatType;
+    const ticketCount = this.ticketRequest.tickets;
+    const seatPrice = this.seatprice[seatType]; 
+    this.ticketRequest.price = ticketCount * seatPrice; 
   }
   bookTicket() {
     for(let i = 1; i <= this.ticketRequest.tickets; i++){
