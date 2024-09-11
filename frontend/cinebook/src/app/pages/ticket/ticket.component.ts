@@ -17,6 +17,13 @@ import { DecoderService } from '../../services/decoder/decoder.service';
 export class TicketComponent implements OnInit {
   availableDates: string[] = [];
   availableTickets: number = 8;
+  seatprice: { [key: string]: number } = {
+    "PLATINUM PLUS": 50,
+    "PLATINUM": 40,
+    "PLATINUM-1": 30,
+    "PLATINUM-2": 20,
+    "GOLD": 10
+  };
   user: any = {
     fullName: '',
     email: '',
@@ -136,7 +143,7 @@ export class TicketComponent implements OnInit {
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const year = date.getFullYear();
 
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   }
 
   onSeatTypeChange(selectedSeatType: string) {
@@ -175,7 +182,14 @@ export class TicketComponent implements OnInit {
 
     console.log(selectedSeatType);
   }
+  calculatePrice() {
+    const seatType = this.ticketRequest.seatType;
+    const ticketCount = this.ticketRequest.tickets;
+    const seatPrice = this.seatprice[seatType]; 
+    this.ticketRequest.price = ticketCount * seatPrice; 
+  }
   bookTicket() {
+    this.calculatePrice();
     for(let i = 1; i <= this.ticketRequest.tickets; i++){
         const selectedSeatType = this.screen.seatLayout.find(
           (seat) => seat.type === this.ticketRequest.seatType
