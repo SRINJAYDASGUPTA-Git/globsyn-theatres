@@ -143,7 +143,7 @@ export class TicketComponent implements OnInit {
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const year = date.getFullYear();
 
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   }
 
   onSeatTypeChange(selectedSeatType: string) {
@@ -189,6 +189,7 @@ export class TicketComponent implements OnInit {
     this.ticketRequest.price = ticketCount * seatPrice; 
   }
   bookTicket() {
+    this.calculatePrice();
     for(let i = 1; i <= this.ticketRequest.tickets; i++){
         const selectedSeatType = this.screen.seatLayout.find(
           (seat) => seat.type === this.ticketRequest.seatType
