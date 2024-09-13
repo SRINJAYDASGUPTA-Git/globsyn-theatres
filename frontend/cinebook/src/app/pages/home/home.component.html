@@ -1,0 +1,11 @@
+  <app-navbar></app-navbar>
+<div *ngIf="movies.length > 0; else noMovies">
+  <h2 class="text-2xl font-bold my-4">Recent Movies</h2>
+  <div class="flex flex-wrap justify-around">
+    <app-card *ngFor="let movie of movies" [movie]="movie"></app-card>
+  </div>
+</div>
+
+<ng-template #noMovies>
+  <p class="text-gray-700 text-center">No recent movies found.</p>
+</ng-template>

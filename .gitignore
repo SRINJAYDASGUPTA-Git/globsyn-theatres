@@ -1,0 +1,4 @@
+# Ignore .env.local file
+backend/api1/.env.local
+
+.idea

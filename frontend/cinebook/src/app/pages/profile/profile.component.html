@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5"></div>
+  <div class="flex justify-center">
+    <div class="w-full md:w-1/2">
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+            Name
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name" [(ngModel)]="currentUser.name">
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+            Email
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email" [(ngModel)]="currentUser.email">
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+            Phone Number
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="phone" placeholder="Phone" [(ngModel)]="currentUser.phone">
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button class="bg-[#f84464] hover:bg-[#f84464] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="updateUser()">
+            Update
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>

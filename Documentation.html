@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Documentation.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <style>
+      /* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+      /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+      body {
+        font-family: var(
+          --vscode-markdown-font-family,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe WPC",
+          "Segoe UI",
+          "Ubuntu",
+          "Droid Sans",
+          sans-serif
+        );
+        font-size: var(--vscode-markdown-font-size, 14px);
+        padding: 0 26px;
+        line-height: var(--vscode-markdown-line-height, 22px);
+        word-wrap: break-word;
+      }
+
+      #code-csp-warning {
+        position: fixed;
+        top: 0;
+        right: 0;
+        color: white;
+        margin: 16px;
+        text-align: center;
+        font-size: 12px;
+        font-family: sans-serif;
+        background-color: #444444;
+        cursor: pointer;
+        padding: 6px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+      }
+
+      #code-csp-warning:hover {
+        text-decoration: none;
+        background-color: #007acc;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+      }
+
+      body.scrollBeyondLastLine {
+        margin-bottom: calc(100vh - 22px);
+      }
+
+      body.showEditorSelection .code-line {
+        position: relative;
+      }
+
+      body.showEditorSelection .code-active-line:before,
+      body.showEditorSelection .code-line:hover:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -12px;
+        height: 100%;
+      }
+
+      body.showEditorSelection li.code-active-line:before,
+      body.showEditorSelection li.code-line:hover:before {
+        left: -30px;
+      }
+
+      .vscode-light.showEditorSelection .code-active-line:before {
+        border-left: 3px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .vscode-light.showEditorSelection .code-line:hover:before {
+        border-left: 3px solid rgba(0, 0, 0, 0.4);
+      }
+
+      .vscode-light.showEditorSelection .code-line .code-line:hover:before {
+        border-left: none;
+      }
+
+      .vscode-dark.showEditorSelection .code-active-line:before {
+        border-left: 3px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .vscode-dark.showEditorSelection .code-line:hover:before {
+        border-left: 3px solid rgba(255, 255, 255, 0.6);
+      }
+
+      .vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+        border-left: none;
+      }
+
+      .vscode-high-contrast.showEditorSelection .code-active-line:before {
+        border-left: 3px solid rgba(255, 160, 0, 0.7);
+      }
+
+      .vscode-high-contrast.showEditorSelection .code-line:hover:before {
+        border-left: 3px solid rgba(255, 160, 0, 1);
+      }
+
+      .vscode-high-contrast.showEditorSelection
+        .code-line
+        .code-line:hover:before {
+        border-left: none;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      a:focus,
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 1px solid -webkit-focus-ring-color;
+        outline-offset: -1px;
+      }
+
+      hr {
+        border: 0;
+        height: 2px;
+        border-bottom: 2px solid;
+      }
+
+      h1 {
+        padding-bottom: 0.3em;
+        line-height: 1.2;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: normal;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      table > thead > tr > th {
+        text-align: left;
+        border-bottom: 1px solid;
+      }
+
+      table > thead > tr > th,
+      table > thead > tr > td,
+      table > tbody > tr > th,
+      table > tbody > tr > td {
+        padding: 5px 10px;
+      }
+
+      table > tbody > tr + tr > td {
+        border-top: 1px solid;
+      }
+
+      blockquote {
+        margin: 0 7px 0 5px;
+        padding: 0 16px 0 10px;
+        border-left-width: 5px;
+        border-left-style: solid;
+      }
+
+      code {
+        font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New",
+          monospace, "Droid Sans Fallback";
+        font-size: 1em;
+        line-height: 1.357em;
+      }
+
+      body.wordWrap pre {
+        white-space: pre-wrap;
+      }
+
+      pre:not(.hljs),
+      pre.hljs code > div {
+        padding: 16px;
+        border-radius: 3px;
+        overflow: auto;
+      }
+
+      pre code {
+        color: var(--vscode-editor-foreground);
+        tab-size: 4;
+      }
+
+      /** Theming */
+
+      .vscode-light pre {
+        background-color: rgba(220, 220, 220, 0.4);
+      }
+
+      .vscode-dark pre {
+        background-color: rgba(10, 10, 10, 0.4);
+      }
+
+      .vscode-high-contrast pre {
+        background-color: rgb(0, 0, 0);
+      }
+
+      .vscode-high-contrast h1 {
+        border-color: rgb(0, 0, 0);
+      }
+
+      .vscode-light table > thead > tr > th {
+        border-color: rgba(0, 0, 0, 0.69);
+      }
+
+      .vscode-dark table > thead > tr > th {
+        border-color: rgba(255, 255, 255, 0.69);
+      }
+
+      .vscode-light h1,
+      .vscode-light hr,
+      .vscode-light table > tbody > tr + tr > td {
+        border-color: rgba(0, 0, 0, 0.18);
+      }
+
+      .vscode-dark h1,
+      .vscode-dark hr,
+      .vscode-dark table > tbody > tr + tr > td {
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+    </style>
+
+    <style>
+      /* Tomorrow Theme */
+      /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+      /* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+      /* Tomorrow Comment */
+      .hljs-comment,
+      .hljs-quote {
+        color: #8e908c;
+      }
+
+      /* Tomorrow Red */
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-tag,
+      .hljs-name,
+      .hljs-selector-id,
+      .hljs-selector-class,
+      .hljs-regexp,
+      .hljs-deletion {
+        color: #c82829;
+      }
+
+      /* Tomorrow Orange */
+      .hljs-number,
+      .hljs-built_in,
+      .hljs-builtin-name,
+      .hljs-literal,
+      .hljs-type,
+      .hljs-params,
+      .hljs-meta,
+      .hljs-link {
+        color: #f5871f;
+      }
+
+      /* Tomorrow Yellow */
+      .hljs-attribute {
+        color: #eab700;
+      }
+
+      /* Tomorrow Green */
+      .hljs-string,
+      .hljs-symbol,
+      .hljs-bullet,
+      .hljs-addition {
+        color: #718c00;
+      }
+
+      /* Tomorrow Blue */
+      .hljs-title,
+      .hljs-section {
+        color: #4271ae;
+      }
+
+      /* Tomorrow Purple */
+      .hljs-keyword,
+      .hljs-selector-tag {
+        color: #8959a8;
+      }
+
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        color: #4d4d4c;
+        padding: 0.5em;
+      }
+
+      .hljs-emphasis {
+        font-style: italic;
+      }
+
+      .hljs-strong {
+        font-weight: bold;
+      }
+    </style>
+
+    <style>
+      /*
+ * Markdown PDF CSS
+ */
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI",
+          "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+        padding: 0 12px;
+      }
+
+      pre {
+        background-color: #f8f8f8;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+
+      pre:not(.hljs) {
+        padding: 23px;
+        line-height: 19px;
+      }
+
+      blockquote {
+        background: rgba(127, 127, 127, 0.1);
+        border-color: rgba(0, 122, 204, 0.5);
+      }
+
+      .emoji {
+        height: 1.4em;
+      }
+
+      code {
+        font-size: 14px;
+        line-height: 19px;
+      }
+
+      /* for inline code */
+      :not(pre):not(.hljs) > code {
+        color: #c9ae75; /* Change the old color so it seems less like an error */
+        font-size: inherit;
+      }
+
+      /* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+      .page {
+        page-break-after: always;
+      }
+    </style>
+
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  </head>
+  <body>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme:
+          document.body.classList.contains("vscode-dark") ||
+          document.body.classList.contains("vscode-high-contrast")
+            ? "dark"
+            : "default",
+      });
+    </script>
+    <h1 id="cinebook-project-documentation">CineBook Project Documentation</h1>
+    <h2 id="1-introduction">1. Introduction</h2>
+    <p>
+      <strong>Project Name:</strong> CineBook<br />
+      <strong>Description:</strong> CineBook is an online movie ticketing system
+      designed for a single theatre. It enables users to view movie schedules,
+      book tickets, make payments, and receive tickets via email. Admins can
+      manage movie listings and schedules.
+    </p>
+    <h2 id="2-technologies-used">2. Technologies Used</h2>
+    <ul>
+      <li>
+        <strong>MEAN Stack:</strong>
+        <ul>
+          <li>
+            <strong>MongoDB:</strong> A NoSQL database used to store user data,
+            movies, bookings, and other records.
+          </li>
+          <li>
+            <strong>Express.js:</strong> Backend framework used to build RESTful
+            APIs.
+          </li>
+          <li>
+            <strong>Angular:</strong> Frontend framework for building dynamic
+            user interfaces.
+          </li>
+          <li>
+            <strong>Node.js:</strong> JavaScript runtime environment for running
+            the server-side application.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Additional Technologies:</strong>
+        <ul>
+          <li>
+            <strong>TailwindCSS:</strong> Used for styling the frontend with
+            responsive design.
+          </li>
+          <li>
+            <strong>Swagger:</strong> Used for API documentation and testing.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="3-features">3. Features</h2>
+    <h3 id="user-features">User Features</h3>
+    <ul>
+      <li>
+        <strong>Movie Listings:</strong> Browse recent movies with schedules.
+      </li>
+      <li>
+        <strong>Online Ticket Booking:</strong> Book tickets for available
+        shows.
+      </li>
+      <li>
+        <strong>Payment Integration:</strong> Secure payment gateway for
+        transactions.
+      </li>
+      <li>
+        <strong>Email Receipts and Tickets:</strong> Automated email with
+        booking confirmation and tickets.
+      </li>
+      <li>
+        <strong>Profile Management:</strong> Users can update profiles and view
+        past ticket bookings.
+      </li>
+    </ul>
+    <h3 id="admin-features">Admin Features</h3>
+    <ul>
+      <li>
+        <strong>Add/Update Movie Listings:</strong> Manage movies and schedules.
+      </li>
+      <li><strong>Booking Management:</strong> Oversee all ticket bookings.</li>
+    </ul>
+    <h2 id="4-architecture-overview">4. Architecture Overview</h2>
+    <ul>
+      <li>
+        <strong>Frontend (Angular):</strong> Communicates with the backend via
+        RESTful APIs and manages user interactions.
+      </li>
+      <li>
+        <strong>Backend (Node.js with Express):</strong> Handles business logic,
+        processes API requests, and manages database interactions.
+      </li>
+      <li>
+        <strong>Database (MongoDB):</strong> Stores application data, including
+        user information, movies, schedules, and ticket bookings.
+      </li>
+      <li>
+        <strong>API Documentation (Swagger):</strong> Provides detailed
+        documentation of API endpoints.
+      </li>
+    </ul>
+    <br />
+    <br /><br /><br /><br/>
+    <h2 id="5-system-requirements">5. System Requirements</h2>
+    <ul>
+      <li><strong>Node.js:</strong> v18.x or higher</li>
+      <li><strong>MongoDB:</strong> v6.x or higher</li>
+      <li><strong>Angular CLI:</strong> v16.x or higher</li>
+      <li>
+        <strong>Payment Gateway Credentials:</strong> (e.g., Stripe, PayPal API
+        keys)
+      </li>
+      <li>
+        <strong>SMTP Configuration:</strong> For email notifications (e.g.,
+        Gmail, SendGrid).
+      </li>
+    </ul>
+    <h2 id="6-installation-guide">6. Installation Guide</h2>
+    <ol>
+      <li>
+        <p><strong>Clone the Repository:</strong></p>
+        <pre
+          class="hljs"
+        ><code><div>git <span class="hljs-built_in">clone</span> &lt;repository_url&gt;
+<span class="hljs-built_in">cd</span> cinebook
+</div></code></pre>
+      </li>
+      <li>
+        <p><strong>Backend Setup:</strong></p>
+        <ul>
+          <li>Navigate to the backend directory.</li>
+          <li>
+            Install dependencies:
+            <pre class="hljs"><code><div>npm install
+</div></code></pre>
+          </li>
+          <li>Set up environment variables in <code>.env</code> file.</li>
+          <li>
+            Start the server:
+            <pre class="hljs"><code><div>npm start
+</div></code></pre>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Frontend Setup:</strong></p>
+        <ul>
+          <li>Navigate to the frontend directory.</li>
+          <li>
+            Install dependencies:
+            <pre class="hljs"><code><div>npm install
+</div></code></pre>
+          </li>
+          <li>
+            Start the Angular app:
+            <pre class="hljs"><code><div>ng serve
+</div></code></pre>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Database Setup:</strong></p>
+        <ul>
+          <li>Ensure MongoDB is running locally or use a cloud instance.</li>
+        </ul>
+      </li>
+    </ol>
+    <br />
+    <h2 id="7-api-documentation">7. API Documentation</h2>
+    <h3 id="api-overview">API Overview</h3>
+    <p>
+      The CineBook API facilitates various operations such as user
+      authentication, movie management, schedule management, and ticket booking.
+      The APIs are documented using Swagger, providing detailed information
+      about each endpoint, including request parameters, request bodies, and
+      response structures.
+    </p>
+    <h3 id="api-endpoints">API Endpoints</h3>
+    <h4 id="1-authentication">1. Authentication</h4>
+    <ul>
+      <li>
+        <p><strong>Register a new user</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>POST /auth/register</code></li>
+          <li>
+            <strong>Request Body:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"John Doe"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"john.doe@example.com"</span>,
+  <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"1234567890"</span>,
+  <span class="hljs-attr">"password"</span>: <span class="hljs-string">"password"</span>
+}
+</div></code></pre>
+          </li>
+          <li>
+            <strong>Response:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"token"</span>: <span class="hljs-string">"jwt_token"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"User created successfully"</span>
+}
+</div></code></pre>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Login a user</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>POST /auth/login</code></li>
+          <li>
+            <strong>Request Body:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"john.doe@example.com"</span>,
+  <span class="hljs-attr">"password"</span>: <span class="hljs-string">"password"</span>
+}
+</div></code></pre>
+          </li>
+		  
+          <li>
+            <strong>Response:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"token"</span>: <span class="hljs-string">"jwt_token"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Logged in successfully"</span>
+}
+</div></code></pre>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h4 id="2-movies">2. Movies</h4>
+    <ul>
+      <li>
+        <p><strong>Get all movies</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>GET /movie</code></li>
+          <li><strong>Response:</strong> Returns a list of all movies.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Add a new movie</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>POST /movie</code></li>
+          <li>
+            <strong>Request Body:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"The Shawshank Redemption"</span>,
+  <span class="hljs-attr">"duration"</span>: <span class="hljs-number">142</span>,
+  <span class="hljs-attr">"genre"</span>: <span class="hljs-string">"Drama"</span>,
+  <span class="hljs-attr">"rel_date"</span>: <span class="hljs-string">"1994-09-23"</span>,
+  <span class="hljs-attr">"cast"</span>: [<span class="hljs-string">"Tim Robbins"</span>, <span class="hljs-string">"Morgan Freeman"</span>],
+  <span class="hljs-attr">"director"</span>: <span class="hljs-string">"Frank Darabont"</span>,
+  <span class="hljs-attr">"imdb_rating"</span>: <span class="hljs-number">9.3</span>,
+  <span class="hljs-attr">"poster"</span>: <span class="hljs-string">"https://example.com/shawshank_redemption.jpg"</span>,
+  <span class="hljs-attr">"language"</span>: <span class="hljs-string">"English"</span>
+}
+</div></code></pre>
+          </li>
+          <li><strong>Response:</strong> The movie is successfully added.</li>
+        </ul>
+      </li>
+    </ul>
+    <h4 id="3-schedules">3. Schedules</h4>
+    <ul>
+      <li>
+        <p><strong>Get all schedules</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>GET /schedule</code></li>
+          <li><strong>Response:</strong> Returns a list of schedules.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Add a new schedule</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>POST /schedule</code></li>
+          <li>
+            <strong>Request Body:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2023-12-01"</span>,
+  <span class="hljs-attr">"start_time"</span>: <span class="hljs-string">"18:00"</span>,
+  <span class="hljs-attr">"end_time"</span>: <span class="hljs-string">"20:30"</span>,
+  <span class="hljs-attr">"movie"</span>: <span class="hljs-string">"movie_id"</span>,
+  <span class="hljs-attr">"screen"</span>: <span class="hljs-string">"screen_id"</span>
+}
+</div></code></pre>
+          </li>
+          <li>
+            <strong>Response:</strong> The schedule is successfully added.
+          </li>
+        </ul>
+      </li>
+    </ul>
+	<br/><br/><br/>
+    <h4 id="4-tickets">4. Tickets</h4>
+    <ul>
+      <li>
+        <p><strong>Get all tickets</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>GET /ticket</code></li>
+          <li><strong>Response:</strong> Returns a list of tickets.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Book a ticket</strong></p>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>POST /ticket</code></li>
+          <li>
+            <strong>Request Body:</strong>
+            <pre class="hljs"><code><div>{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"John Doe"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2024-08-10"</span>,
+  <span class="hljs-attr">"time"</span>: <span class="hljs-string">"19:30"</span>,
+  <span class="hljs-attr">"movie"</span>: <span class="hljs-string">"movie_id"</span>,
+  <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"schedule_id"</span>,
+  <span class="hljs-attr">"screen"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"seat"</span>: [<span class="hljs-string">"A12"</span>, <span class="hljs-string">"A13"</span>],
+  <span class="hljs-attr">"seatType"</span>: <span class="hljs-string">"VIP"</span>,
+  <span class="hljs-attr">"price"</span>: <span class="hljs-number">25</span>
+}
+</div></code></pre>
+          </li>
+          <li><strong>Response:</strong> The ticket is successfully booked.</li>
+        </ul>
+      </li>
+    </ul>
+    <h4 id="5-users">5. Users</h4>
+    <ul>
+      <li>
+        <strong>Get all users</strong>
+        <ul>
+          <li><strong>Endpoint:</strong> <code>GET /user</code></li>
+          <li><strong>Response:</strong> Returns a list of users.</li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="8-detailed-architecture-overview">
+      8. Detailed Architecture Overview
+    </h2>
+    <p>The CineBook application follows a modern web architecture pattern:</p>
+    <ul>
+      <li>
+        <strong>Frontend (Angular):</strong> The Angular frontend communicates
+        with the backend via RESTful APIs. It renders user interfaces
+        dynamically and manages user interactions such as booking tickets and
+        managing profiles.
+      </li>
+      <li>
+        <strong>Backend (Node.js with Express):</strong> The backend handles
+        business logic, processes API requests, and interacts with the MongoDB
+        database. It manages user authentication, movie listings, ticket
+        booking, and admin functionalities.
+      </li>
+      <li>
+        <strong>Database (MongoDB):</strong> MongoDB stores all application
+        data, including user information, movies, schedules, and ticket
+        bookings. It is a NoSQL database that provides flexibility in handling
+        unstructured data, making it suitable for scalable applications.
+      </li>
+      <li>
+        <strong>API Documentation (Swagger):</strong> Swagger is used to
+        document and test the API endpoints, ensuring that all functionalities
+        are well-documented and accessible.
+      </li>
+    </ul>
+	<br/><br/>
+    <h2 id="9-database-schema">9. Database Schema</h2>
+    <p>
+      The CineBook application uses MongoDB to store data. Below are the key
+      collections and their attributes:
+    </p>
+    <ul>
+      <li>
+        <strong>Users Collection:</strong> Stores user details such as name,
+        email, phone, and password.
+      </li>
+      <li>
+        <strong>Movies Collection:</strong> Stores movie information including
+        title, genre, director, cast, release date, and ratings.
+      </li>
+      <li>
+        <strong>Schedules Collection:</strong> Contains scheduling information
+        including dates, start and end times, associated movies, and screens.
+      </li>
+      <li>
+        <strong>Tickets Collection:</strong> Manages booking details like user
+        ID, movie, schedule, seats, and ticket prices.
+      </li>
+    </ul>
+    <h2 id="10-api-error-handling-and-security-measures">
+      10. API Error Handling and Security Measures
+    </h2>
+    <p>
+      CineBook implements comprehensive error handling to ensure smooth user
+      experience:
+    </p>
+    <ul>
+      <li>
+        <strong>Error Codes:</strong> Common error codes include 400 (Bad
+        Request), 401 (Unauthorized), 404 (Not Found), and 500 (Internal Server
+        Error).
+      </li>
+      <li>
+        <strong>Error Messages:</strong> Descriptive error messages guide users
+        and developers to understand issues quickly.
+      </li>
+      <li>
+        <strong>Security Measures:</strong>
+        <ul>
+          <li>
+            <strong>JWT Authentication:</strong> Ensures secure access to
+            protected routes.
+          </li>
+          <li>
+            <strong>Input Validation:</strong> Prevents SQL Injection, XSS
+            attacks, and other vulnerabilities.
+          </li>
+          <li>
+            <strong>Rate Limiting:</strong> Protects the API from abuse by
+            limiting the number of requests per user.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="11-deployment-guide">11. Deployment Guide</h2>
+    <p>To deploy CineBook, follow these steps:</p>
+    <ul>
+      <li>
+        <strong>Frontend Deployment:</strong> Deploy on Vercel or Netlify by
+        linking the GitHub repository.
+      </li>
+      <li>
+        <strong>Backend Deployment:</strong> Host on AWS EC2, Heroku, or
+        DigitalOcean. Ensure the server can run Node.js.
+      </li>
+      <li>
+        <strong>Database Deployment:</strong> Use MongoDB Atlas for cloud-based
+        MongoDB.
+      </li>
+      <li>
+        <strong>Environment Configuration:</strong> Set environment variables
+        for production, including API keys, JWT secrets, and database URIs.
+      </li>
+    </ul>
+    <h2 id="12-testing-strategy">12. Testing Strategy</h2>
+    <p>Testing ensures the stability and reliability of CineBook:</p>
+    <ul>
+      <li>
+        <strong>Unit Testing:</strong> Tests individual components and functions
+        using frameworks like Jest and Jasmine.
+      </li>
+      <li>
+        <strong>Integration Testing:</strong> Verifies that the frontend,
+        backend, and database interact correctly.
+      </li>
+      <li>
+        <strong>Manual Testing:</strong> Comprehensive testing by team members
+        to ensure all features work as expected.
+      </li>
+      <li>
+        <strong>API Testing:</strong> Conducted via Swagger and Postman to
+        validate the API endpoints.
+      </li>
+    </ul>
+    <h2 id="13-challenges-faced">13. Challenges Faced</h2>
+    <p>
+      Throughout the development of CineBook, the team encountered several
+      challenges:
+    </p>
+    <ul>
+      <li>
+        <strong>Payment Integration:</strong> Ensuring secure and reliable
+        payment processing was a major hurdle. We used third-party payment
+        services like Stripe or PayPal to manage transactions securely.
+      </li>
+      <li>
+        <strong>Handling Scalability:</strong> As the number of users grew, we
+        had to optimize the database queries and server performance to handle
+        increased load efficiently.
+      </li>
+      <li>
+        <strong>Cross-Browser Compatibility:</strong> Ensuring that the
+        application works seamlessly across different browsers and devices
+        required thorough testing and adjustments in the frontend code.
+      </li>
+    </ul>
+    <h2 id="14-future-enhancements">14. Future Enhancements</h2>
+    <p>
+      The CineBook project has the potential for several future enhancements:
+    </p>
+    <ul>
+      <li>
+        <strong>Mobile Application:</strong> Develop a mobile app to provide a
+        more convenient booking experience.
+      </li>
+      <li>
+        <strong>Advanced Analytics:</strong> Integrate analytics to track user
+        behavior, movie popularity, and booking trends.
+      </li>
+      <li>
+        <strong>Additional Payment Options:</strong> Expand payment options to
+        include more services and currencies.
+      </li>
+      <li>
+        <strong>User Reviews and Ratings:</strong> Allow users to rate and
+        review movies to help others make informed decisions.
+      </li>
+    </ul>
+    <h2 id="15-conclusion">15. Conclusion</h2>
+    <p>
+      CineBook provides a comprehensive solution for online movie ticket booking
+      with robust features for both users and admins. It leverages modern
+      technologies like the MEAN stack and tools like TailwindCSS and Swagger to
+      deliver a responsive and well-documented application. Despite the
+      challenges faced, the project successfully meets its objectives and offers
+      a solid foundation for future growth and enhancements.
+    </p>
+  </body>
+</html>

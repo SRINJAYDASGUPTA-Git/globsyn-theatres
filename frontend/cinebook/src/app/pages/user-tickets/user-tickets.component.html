@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+<div class="p-5">
+  <div  class="flex flex-col items-center justify-center w-full gap-3">
+    <div class="bg-gray-100 flex items-center justify-center" *ngFor="let ticket of tickets">
+      <div class="bg-white rounded-lg shadow-lg w-80 p-4 notched-ticket">
+          <div class="flex items-center justify-between">
+              <div>
+                  <h2 class="text-xl font-semibold">{{ticket.movie.name}}</h2>
+                  <p class="text-sm text-gray-500">{{ticket.movie.language }}</p>
+                <p class="text-sm text-gray-500">{{ticket.ticket.date | date : 'mediumDate'}}, {{ticket.ticket.time | timeFormat}}</p>
+                  <p class="text-sm text-gray-500">Globsyn Theatres</p>
+              </div>
+              <img [src]="ticket.movie.poster" [alt]="ticket.movie.name" class="rounded w-16 h-20">
+          </div>
+
+          <div class="mt-4 text-center border-t border-b py-2">
+              <p class="font-bold text-lg">{{ticket.ticket.tickets}} Ticket(s)</p>
+              <p class="text-sm text-gray-700">{{ticket.ticket.name.split(" ")[0]}}</p>
+              <p class="text-sm text-gray-500">{{ticket.ticket.seatType}} - {{ticket.ticket.seat}}</p>
+          </div>
+
+          <div class="flex justify-center my-4">
+              <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=' + ticket.ticket._id" alt="QR Code" class="w-24 h-24">
+          </div>
+
+          <p class="text-center text-xs text-gray-400 mb-2">Booking ID: {{ticket.ticket._id?.toUpperCase()}}</p>
+          <p class="text-center text-xs text-gray-400 mb-4">Cancellation available: cut-off time of 4 hrs before showtime</p>
+
+          <div class="flex justify-around text-xs text-gray-600">
+              <button class="flex flex-col items-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.55-4.55a1.5 1.5 0 00-2.12-2.12L12.88 7.88M5 19h9a1 1 0 001-1V9.42a1 1 0 00-.29-.7L11.3 2.29a1 1 0 00-.7-.29H5a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
+                  </svg>
+                  <span>Send tickets to friends</span>
+              </button>
+              <button class="flex flex-col items-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  <span>Cancel booking</span>
+              </button>
+              <button class="flex flex-col items-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1 4V8m0 8v-4m-4-6h6m-6 0h-.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span>Contact support</span>
+              </button>
+          </div>
+
+          <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+              <div class="flex justify-between text-sm text-gray-600">
+                  <span>Ticket price ({{ticket.ticket.tickets}})</span>
+                  <span>&#x20B9; {{ticket.ticket.price}}</span>
+              </div>
+              <div class="flex justify-between text-sm text-gray-600">
+                  <span>Convenience Fee</span>
+                  <span>&#x20B9; 0</span>
+              </div>
+              <div class="flex justify-between text-sm text-gray-600">
+                  <span>Discount</span>
+                  <span>- &#x20B9; 0.00</span>
+              </div>
+              <div class="flex justify-between font-bold text-gray-800 mt-2">
+                  <span>Total Amount</span>
+                  <span>&#x20B9; {{ticket.ticket.price}}</span>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

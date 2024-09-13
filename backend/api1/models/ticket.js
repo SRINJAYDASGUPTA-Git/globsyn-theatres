@@ -12,6 +12,7 @@ const ticketSchema = new mongoose.Schema({
   },
   screen: { type: Number, required: true },
   seat: { type: [String], required: true },
+  tickets: { type: Number, required: true },
   seatType: { type: String, required: true },
   price: { type: Number, required: true },
 });
