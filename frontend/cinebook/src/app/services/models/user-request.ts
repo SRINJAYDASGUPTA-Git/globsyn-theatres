@@ -10,7 +10,7 @@ export interface UserRequest {
   /**
    * Auto-generated unique identifier
    */
-  id?: string;
+  _id?: string;
 
   /**
    * Name of the user
@@ -26,9 +26,5 @@ export interface UserRequest {
    * Phone number of the user
    */
   phone: string;
-
-  /**
-   * List of ticket IDs
-   */
-  tickets: Array<string>;
+  tickets?: Array<string>;
 }

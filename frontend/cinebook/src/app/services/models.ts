@@ -2,6 +2,8 @@
 /* eslint-disable */
 export { AuthenticationRequest } from './models/authentication-request';
 export { AuthenticationResponse } from './models/authentication-response';
+export { BookingDetails } from './models/booking-details';
+export { EmailTicketBody } from './models/email-ticket-body';
 export { Movie } from './models/movie';
 export { RegisterRequest } from './models/register-request';
 export { Schedule } from './models/schedule';

@@ -36,6 +36,11 @@ export class NavbarComponent implements OnInit {
       .subscribe((user) => {
         this.currentUser = user;
       });
+
+      if(this.isAdmin)
+      {
+        this.router.navigate(['/admin']);
+      }
   }
 
   logout() {
