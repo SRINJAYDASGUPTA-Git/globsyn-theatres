@@ -18,6 +18,7 @@ import { UserTicketsComponent } from './pages/user-tickets/user-tickets.componen
 import { BookTicketComponent } from './pages/book-ticket/book-ticket.component';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { DatePipe } from '@angular/common';
+import { AdminFormComponent } from './admin-form/admin-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DatePipe } from '@angular/common';
     ProfileComponent,
     UserTicketsComponent,
     BookTicketComponent,
-    TimeFormatPipe
+    TimeFormatPipe,
+    AdminFormComponent
   ],
   imports: [
     BrowserModule,
