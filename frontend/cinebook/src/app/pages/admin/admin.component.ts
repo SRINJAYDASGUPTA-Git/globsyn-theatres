@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MoviesService, SchedulesService, ScreensService } from '../../services/services';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Movie, Schedule, Screen } from '../../services/models';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -9,10 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class AdminComponent implements OnInit {
   movieScheduleForm!: FormGroup;
-  movies: any[] = [];
-  screens: any[] = [];
+  movies: Movie[] = [];
+  schedules:Schedule[]=[];
+  screens: Screen[] = [];
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private movieService: MoviesService,
     private scheduleService: SchedulesService,
@@ -74,5 +79,35 @@ export class AdminComponent implements OnInit {
         console.error('Error adding movie:', error);
       });
     }
+  }
+  deleteMovie(movieId?: string): void {
+    if (!movieId) {
+      console.error('Movie ID is undefined');
+      return;
+    }
+
+    const confirmDelete = confirm('Are you sure you want to delete this movie?');
+    if (confirmDelete) {
+      this.movieService.movieIdDelete({ id: movieId }).subscribe({
+        next: () => {
+          console.log('Movie deleted successfully');
+          this.loadMovies();
+        },
+        error: error => {
+          console.error('Error deleting movie:', error);
+      }
+    }
+      );
+    }
+  }
+
+  addMovie() {
+    this.router.navigate(['/admin/add-movie/']);
+  }
+  addSchedule() {
+    this.router.navigate(['/admin/add-schedule']);
+  }
+  addScreen() {
+    this.router.navigate(['/admin/add-screen']);
   }
 }

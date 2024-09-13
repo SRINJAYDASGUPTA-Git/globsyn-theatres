@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6">Add New Schedule</h2>
+
+  <div class="mb-4">
+    <label for="date" class="block text-gray-700 font-semibold mb-2">Date</label>
+    <input id="date" formControlName="date" type="date"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="scheduleForm.get('date')?.invalid && scheduleForm.get('date')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Date is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="startTime" class="block text-gray-700 font-semibold mb-2">Start Time</label>
+    <input id="startTime" formControlName="start_time" type="time"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="scheduleForm.get('start_time')?.invalid && scheduleForm.get('start_time')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Start Time is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="endTime" class="block text-gray-700 font-semibold mb-2">End Time</label>
+    <input id="endTime" formControlName="end_time" type="time"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="scheduleForm.get('end_time')?.invalid && scheduleForm.get('end_time')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      End Time is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="movie" class="block text-gray-700 font-semibold mb-2">Movie ID</label>
+    <input id="movie" formControlName="movie" type="text" placeholder="Enter movie ID"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="scheduleForm.get('movie')?.invalid && scheduleForm.get('movie')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Movie ID is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="screen" class="block text-gray-700 font-semibold mb-2">Screen ID</label>
+    <input id="screen" formControlName="screen" type="text" placeholder="Enter screen ID"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="scheduleForm.get('screen')?.invalid && scheduleForm.get('screen')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Screen ID is required.
+    </div>
+  </div>
+
+  <button type="submit"
+          [disabled]="scheduleForm.invalid"
+          class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    Add Schedule
+  </button>
+</form>

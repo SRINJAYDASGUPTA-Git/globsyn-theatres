@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<form [formGroup]="movieForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6">Add New Movie</h2>
+
+  <div class="mb-4">
+    <label for="title" class="block text-gray-700 font-semibold mb-2">Title</label>
+    <input id="title" formControlName="title" type="text" placeholder="Enter movie title"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('title')?.invalid && movieForm.get('title')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Title is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="description" class="block text-gray-700 font-semibold mb-2">Description</label>
+    <textarea id="description" formControlName="description" placeholder="Enter movie description"
+              rows="4"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </textarea>
+    <div *ngIf="movieForm.get('description')?.invalid && movieForm.get('description')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Description is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="releaseDate" class="block text-gray-700 font-semibold mb-2">Release Date</label>
+    <input id="releaseDate" formControlName="releaseDate" type="date"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('releaseDate')?.invalid && movieForm.get('releaseDate')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Release date is required.
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <label for="genre" class="block text-gray-700 font-semibold mb-2">Genre</label>
+    <select id="genre" formControlName="genre"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <option value="">Select genre</option>
+      <option value="action">Action</option>
+      <option value="comedy">Comedy</option>
+      <option value="drama">Drama</option>
+      <option value="horror">Horror</option>
+      <option value="sci-fi">Sci-Fi</option>
+    </select>
+    <div *ngIf="movieForm.get('genre')?.invalid && movieForm.get('genre')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Genre is required.
+    </div>
+  </div>
+
+  <button type="submit"
+          [disabled]="movieForm.invalid"
+          class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    Add Movie
+  </button>
+</form>
+

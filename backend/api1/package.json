@@ -35,7 +35,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.2",
     "nodemailer": "^6.9.15",
-    "razorpay": "^2.9.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },

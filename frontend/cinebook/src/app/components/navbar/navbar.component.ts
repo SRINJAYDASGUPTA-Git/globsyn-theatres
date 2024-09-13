@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
         this.currentUser = user;
       });
 
-      if(this.isAdmin)
+      if(this.isAdmin && this.router.url === '/')
       {
         this.router.navigate(['/admin']);
       }

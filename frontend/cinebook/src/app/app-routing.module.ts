@@ -8,6 +8,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { UserTicketsComponent } from './pages/user-tickets/user-tickets.component';
 import { BookTicketComponent } from './pages/book-ticket/book-ticket.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AddMovieComponent } from './pages/add-movie/add-movie.component';
+import { AddScheduleComponent } from './pages/add-schedule/add-schedule.component';
+import { AddScreenComponent } from './pages/add-screen/add-screen.component';
 
 const routes: Routes = [
   {
@@ -40,6 +43,21 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin/add-movie',
+    component: AddMovieComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin/add-schedule',
+    component: AddScheduleComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin/add-screen',
+    component: AddScreenComponent,
     canActivate: [authGuard]
   }
 ];
