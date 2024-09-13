@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Ticket</title>
+    <style>
+      body {
+        background-color: #f3f4f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .ticket-container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 320px;
+        padding: 16px;
+        font-family: Arial, sans-serif;
+      }
+
+      .ticket-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .ticket-header h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .ticket-header p {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin: 2px 0;
+      }
+
+      .ticket-poster {
+        border-radius: 5px;
+        width: 64px;
+        height: 80px;
+        object-fit: cover;
+      }
+
+      .ticket-info {
+        margin-top: 16px;
+        padding: 8px 0;
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: center;
+      }
+
+      .ticket-info p {
+        margin: 4px 0;
+      }
+
+      .ticket-info .ticket-count {
+        font-weight: bold;
+        font-size: 1.125rem;
+      }
+
+      .qr-code-container {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0;
+      }
+
+      .qr-code {
+        width: 96px;
+        height: 96px;
+      }
+
+      .footer-text {
+        font-size: 0.75rem;
+        color: #9ca3af;
+        text-align: center;
+        margin: 8px 0;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.75rem;
+        color: #4b5563;
+      }
+
+      .action-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .action-button svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .pricing-container {
+        margin-top: 16px;
+        padding: 16px;
+        background-color: #f3f4f6;
+        border-radius: 8px;
+      }
+
+      .pricing-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        color: #4b5563;
+        margin: 4px 0;
+      }
+
+      .pricing-row.total {
+        font-weight: bold;
+        margin-top: 8px;
+        color: #1f2937;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ticket-container">
+      <div class="ticket-header">
+        <div>
+          <h2>{{movieName}}</h2>
+          <p>{{movieLanguage}}</p>
+          <p>{{bookingDate}}, {{bookingTime}}</p>
+          <p>Globsyn Theatres</p>
+        </div>
+        <img
+          src="{{moviePosterUrl}}"
+          alt="{{movieName}}"
+          class="ticket-poster"
+        />
+      </div>
+
+      <div class="ticket-info">
+        <p class="ticket-count">{{numberOfTickets}} Ticket(s)</p>
+        <p>{{userName}}</p>
+        <p>{{seatType}} - {{seatNumbers}}</p>
+      </div>
+
+      <div class="qr-code-container">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{ticketId}}"
+          alt="QR Code"
+          class="qr-code"
+        />
+      </div>
+
+      <p class="footer-text">Booking ID: {{ticketId}}</p>
+      <p class="footer-text">
+        Cancellation available: cut-off time of 4 hrs before showtime
+      </p>
+
+      <div class="pricing-container">
+        <div class="pricing-row">
+          <span>Ticket price ({{numberOfTickets}})</span>
+          <span>&#x20B9; {{ticketPrice}}</span>
+        </div>
+        <div class="pricing-row">
+          <span>Convenience Fee</span>
+          <span>&#x20B9; 200</span>
+        </div>
+        <div class="pricing-row">
+          <span>Discount</span>
+          <span>- &#x20B9; 0.00</span>
+        </div>
+        <div class="pricing-row total">
+          <span>Total Amount</span>
+          <span>&#x20B9; {{totalPrice}}</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

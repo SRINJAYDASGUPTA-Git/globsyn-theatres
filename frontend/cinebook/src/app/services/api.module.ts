@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthenticationService } from './services/authentication.service';
+import { EmailConfirmationService } from './services/email-confirmation.service';
 import { MoviesService } from './services/movies.service';
 import { SchedulesService } from './services/schedules.service';
 import { ScreensService } from './services/screens.service';
@@ -20,6 +21,7 @@ import { UsersService } from './services/users.service';
   declarations: [],
   providers: [
     AuthenticationService,
+    EmailConfirmationService,
     MoviesService,
     SchedulesService,
     ScreensService,

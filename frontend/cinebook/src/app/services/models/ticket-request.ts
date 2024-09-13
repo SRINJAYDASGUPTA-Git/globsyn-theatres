@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface TicketRequest {
+
   /**
    * Date of the event
    */
@@ -9,7 +10,7 @@ export interface TicketRequest {
   /**
    * Auto-generated unique identifier
    */
-  id?: string;
+  _id?: string;
 
   /**
    * ID of the movie
@@ -47,12 +48,12 @@ export interface TicketRequest {
   seatType: string;
 
   /**
-   * Time of the event in HH:mm format
-   */
-  time: string;
-
-  /**
    * Number of tickets
    */
   tickets: number;
+
+  /**
+   * Time of the event in HH:mm format
+   */
+  time: string;
 }

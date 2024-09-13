@@ -89,6 +89,74 @@
         }
       }
     },
+    "/email/send-email": {
+      "post": {
+        "summary": "Send a booking confirmation email to the user",
+        "tags": [
+          "EmailConfirmation"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailTicketBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email sent successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Missing required fields"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to send email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Failed to send email"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/movie": {
       "get": {
         "summary": "Retrieve a list of movies",
@@ -870,6 +938,100 @@
           "password": "password"
         }
       },
+      "EmailTicketBody": {
+        "type": "object",
+        "required": [
+          "email",
+          "bookingDetails"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "dasguptasrinjay2004@gmail.com"
+          },
+          "bookingDetails": {
+            "$ref": "#/components/schemas/BookingDetails"
+          }
+        }
+      },
+      "BookingDetails": {
+        "type": "object",
+        "required": [
+          "username",
+          "movieName",
+          "movieLanguage",
+          "bookingDate",
+          "bookingTime",
+          "moviePosterUrl",
+          "numberOfTickets",
+          "seatType",
+          "seatNumbers",
+          "ticketId",
+          "ticketPrice",
+          "totalPrice"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Srinjay Das Gupta"
+          },
+          "movieName": {
+            "type": "string",
+            "example": "The Dark Knight"
+          },
+          "movieLanguage": {
+            "type": "string",
+            "example": "English"
+          },
+          "bookingDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-09-17T00:00:00.000Z"
+          },
+          "bookingTime": {
+            "type": "string",
+            "example": 1200
+          },
+          "moviePosterUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://www.google.com"
+          },
+          "numberOfTickets": {
+            "type": "integer",
+            "example": 4
+          },
+          "seatType": {
+            "type": "string",
+            "example": "Platinum"
+          },
+          "seatNumbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "A1",
+              "A2",
+              "A3",
+              "A4"
+            ]
+          },
+          "ticketId": {
+            "type": "string",
+            "example": "66e1d4cc505c52a43e951916"
+          },
+          "ticketPrice": {
+            "type": "number",
+            "example": 250
+          },
+          "totalPrice": {
+            "type": "number",
+            "example": 1000
+          }
+        }
+      },
       "Movie": {
         "type": "object",
         "required": [
@@ -1364,6 +1526,10 @@
     {
       "name": "Authentication",
       "description": "APIs for user authentication"
+    },
+    {
+      "name": "EmailConfirmation",
+      "description": "Send email confirmation to the user after booking tickets"
     },
     {
       "name": "Movies",

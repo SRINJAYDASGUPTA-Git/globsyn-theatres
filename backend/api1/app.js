@@ -28,6 +28,7 @@ const scheduleRouter = require("./routes/schedules");
 const ticketRouter = require("./routes/tickets");
 const screenRouter = require("./routes/screens");
 const authRouter = require("./routes/auth");
+const emailRouter = require("./routes/email");
 
 const options = {
   definition: {
@@ -86,5 +87,7 @@ app.use("/ticket", ticketRouter);
 // Screen Endpoints
 app.use("/screen", screenRouter);
 
+//Email Endpoints
+app.use("/email", emailRouter);
 app.listen(5000);
 //comment

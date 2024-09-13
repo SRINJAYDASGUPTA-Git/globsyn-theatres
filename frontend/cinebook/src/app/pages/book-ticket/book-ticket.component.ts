@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  EmailConfirmationService,
   MoviesService,
   SchedulesService,
   ScreensService,
   TicketsService,
   UsersService,
 } from '../../services/services';
-import { Movie, Schedule, Screen, TicketRequest, UserResponse } from '../../services/models';
+import { EmailTicketBody, Movie, Schedule, Screen, TicketRequest, BookingDetails } from '../../services/models';
 import { DecoderService } from '../../services/decoder/decoder.service';
 @Component({
   selector: 'app-book-ticket',
@@ -77,7 +78,20 @@ export class BookTicketComponent implements OnInit {
     time: '',
     tickets: 0,
   };
-
+  bookingDetails: BookingDetails = {
+    bookingDate: '',
+    bookingTime: '',
+    movieLanguage: '',
+    movieName: '',
+    moviePosterUrl: '',
+    numberOfTickets: 0,
+    seatNumbers: [],
+    seatType: '',
+    ticketId: '',
+    username: '',
+    ticketPrice: 0,
+    totalPrice: 0,
+  };
   constructor(
     private route: ActivatedRoute,
     private scheduleService: SchedulesService,
@@ -86,6 +100,7 @@ export class BookTicketComponent implements OnInit {
     private decoderService: DecoderService,
     private ticketService: TicketsService,
     private userService: UsersService,
+    private emailService: EmailConfirmationService,
     private router: Router
   ) {}
 
@@ -223,6 +238,34 @@ export class BookTicketComponent implements OnInit {
           },
         });
 
+        this.bookingDetails = {
+          bookingDate: this.ticketRequest.date,
+          bookingTime: this.ticketRequest.time,
+          movieLanguage: this.movie.language,
+          movieName: this.movie.name,
+          moviePosterUrl: this.movie.poster,
+          numberOfTickets: this.ticketRequest.tickets,
+          seatNumbers: this.ticketRequest.seat,
+          seatType: this.ticketRequest.seatType,
+          ticketId: ticket._id || '',
+          username: this.user.fullName,
+          ticketPrice: this.ticketRequest.price,
+          totalPrice: this.ticketRequest.price + 200.0,
+
+        };
+        let emailTicketBody: EmailTicketBody = {
+          email: this.user.email,
+          bookingDetails: this.bookingDetails,
+        };
+        console.log('Email ticket body:', emailTicketBody);
+        this.emailService.emailSendEmailPost({ body: emailTicketBody }).subscribe({
+          next: (response) => {
+            console.log('Email sent:', response);
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          },
+        });
         this.router.navigate(['']);
       },
       error: (err) => {

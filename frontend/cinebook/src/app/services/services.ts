@@ -1,4 +1,5 @@
 export { AuthenticationService } from './services/authentication.service';
+export { EmailConfirmationService } from './services/email-confirmation.service';
 export { MoviesService } from './services/movies.service';
 export { SchedulesService } from './services/schedules.service';
 export { ScreensService } from './services/screens.service';

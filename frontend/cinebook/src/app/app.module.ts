@@ -8,10 +8,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { CardComponent } from './components/card/card.component';
-import { TicketComponent } from './pages/ticket/ticket.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserTicketsComponent } from './pages/user-tickets/user-tickets.component';
@@ -19,6 +18,7 @@ import { BookTicketComponent } from './pages/book-ticket/book-ticket.component';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { DatePipe } from '@angular/common';
 import { AdminFormComponent } from './admin-form/admin-form.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -29,20 +29,21 @@ import { AdminFormComponent } from './admin-form/admin-form.component';
     DrawerComponent,
     RegisterComponent,
     CardComponent,
-    TicketComponent,
     RatingComponent,
     ProfileComponent,
     UserTicketsComponent,
     BookTicketComponent,
     TimeFormatPipe,
-    AdminFormComponent
+    AdminFormComponent,
+    AdminComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      FormsModule,
+
+    ],
   exports: [
     TimeFormatPipe
   ],
