@@ -967,7 +967,9 @@
           "numberOfTickets",
           "seatType",
           "seatNumbers",
-          "ticketId"
+          "ticketId",
+          "ticketPrice",
+          "totalPrice"
         ],
         "properties": {
           "username": {
@@ -1019,6 +1021,14 @@
           "ticketId": {
             "type": "string",
             "example": "66e1d4cc505c52a43e951916"
+          },
+          "ticketPrice": {
+            "type": "number",
+            "example": 250
+          },
+          "totalPrice": {
+            "type": "number",
+            "example": 1000
           }
         }
       },

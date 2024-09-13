@@ -94,6 +94,12 @@ const loadTemplate = (filePath, replacements) => {
  *         ticketId:
  *           type: string
  *           example: 66e1d4cc505c52a43e951916
+ *         ticketPrice:
+ *           type: number
+ *           example: 500
+ *         totalPrice:
+ *           type: number
+ *           example: 2000
  */
 
 /**
