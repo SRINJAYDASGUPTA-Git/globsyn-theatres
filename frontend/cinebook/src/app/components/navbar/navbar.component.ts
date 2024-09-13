@@ -10,6 +10,10 @@ import { UserResponse } from '../../services/models';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
+  isMenuOpen = false;
+  menuToggle() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   currentUser: UserResponse = {
     email: '',
     name: '',
@@ -25,12 +29,13 @@ export class NavbarComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     const id = this.decoderService.decodeToken().userId;
-    this.usersService.userIdGet({
-      id: id,
-    }).subscribe((user) => {
-      this.currentUser = user;
-    })
-    
+    this.usersService
+      .userIdGet({
+        id: id,
+      })
+      .subscribe((user) => {
+        this.currentUser = user;
+      });
   }
 
   logout() {
@@ -47,6 +52,4 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn && this.decoderService.decodeToken().role === 'admin'
     );
   }
-
-
 }

@@ -14,6 +14,10 @@ import { CardComponent } from './components/card/card.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UserTicketsComponent } from './pages/user-tickets/user-tickets.component';
+import { BookTicketComponent } from './pages/book-ticket/book-ticket.component';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CardComponent,
     TicketComponent,
     RatingComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserTicketsComponent,
+    BookTicketComponent,
+    TimeFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HttpClientModule,
     FormsModule
   ],
+  exports: [
+    TimeFormatPipe
+  ],
   providers: [
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

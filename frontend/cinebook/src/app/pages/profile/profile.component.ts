@@ -10,9 +10,6 @@ import { UserResponse } from '../../services/models';
   styleUrl: './profile.component.css',
 })
 export class ProfileComponent implements OnInit {
-updateUser() {
-throw new Error('Method not implemented.');
-}
   userId: string = '';
   currentUser: UserResponse = {
     email: '',
@@ -21,15 +18,37 @@ throw new Error('Method not implemented.');
     phone: '',
     tickets: [],
   };
-  constructor(private router: Router, private usersService: UsersService, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private usersService: UsersService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
-    this.usersService.userIdGet({
-      id: this.userId,
-    }).subscribe((user) => {
-      this.currentUser = user;
-      console.log(this.currentUser);
-    });
+    this.usersService
+      .userIdGet({
+        id: this.userId,
+      })
+      .subscribe((user) => {
+        this.currentUser = user;
+        console.log(this.currentUser);
+      });
+  }
 
+  updateUser() {
+    this.usersService
+      .userIdPut({
+        id: this.userId,
+        body: this.currentUser,
+      })
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error updating user');
+        },
+      });
   }
 }

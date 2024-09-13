@@ -1,39 +1,108 @@
-<nav class=" fixed w-full top-0 z-50 shadow-lg bg-white">
+<nav class="fixed w-full top-0 z-50 shadow-lg bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex items-center">
         <a href="/" class="text-white text-xl font-bold">
           <div class="w-[17%] hidden md:block">
-            <img src="/icons/CB_full_logo.png" alt="" srcset="">
+            <img src="/icons/CB_full_logo.png" alt="" srcset="" />
           </div>
           <div class="w-[15%] md:hidden">
-            <img src="/icons/CB_Logo.png" alt="" srcset="">
+            <img src="/icons/CB_Logo.png" alt="" srcset="" />
           </div>
         </a>
       </div>
       <div class="md:flex items-center space-x-4 hidden">
-        <a href="/" class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-        <a href="/about" class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
-        <a href="/contact" class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+        <a
+          href="/"
+          class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >Home</a
+        >
+        <a
+          href="/about"
+          class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >About</a
+        >
+        <a
+          href="/contact"
+          class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >Contact</a
+        >
 
-        <a *ngIf="!isLoggedIn" href="/login" class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+        <a
+          *ngIf="!isLoggedIn"
+          href="/login"
+          class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+        >
           Login
         </a>
 
-        <a *ngIf="isLoggedIn" [routerLink]="'profile/' + currentUser._id" class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-          Hi, {{currentUser.name.split(' ')[0]}}
-        </a>
+        <div class="relative" (click)="menuToggle()" *ngIf="isLoggedIn">
+          <button
+            class="flex items-center group text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            id="userDropdownButton"
+          >
+            <span class="text-gray-800 group-hover:text-white font-medium"
+              >Hi, {{ currentUser.name.split(" ")[0] }}</span
+            >
+          </button>
 
-        <a *ngIf="isLoggedIn" (click)="logout()" class="text-gray-800 hover:bg-[#f84464] hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-          Logout
-        </a>
+          <div
+            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 transition duration-200 ease-in-out transform opacity-0 scale-95"
+            [ngClass]="{ 'opacity-100 scale-100': isMenuOpen }"
+            id="userDropdownMenu"
+          >
+            <h3 class="text-center p-2 text-gray-700 font-semibold">
+              {{ currentUser.name }}
+              <br />
+            </h3>
+            <ul class="border-t">
+              <li
+                class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <img src="/icons/user.svg" class="w-4 mr-2" alt="icon" />
+                <a
+                  [routerLink]="'/profile/' + currentUser._id"
+                  class="text-gray-600"
+                  >My profile</a
+                >
+              </li>
+              <li
+                class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <img src="/icons/edit.svg" class="w-4 mr-2" alt="icon" />
+                <a
+                  [routerLink]="'/profile/' + currentUser._id"
+                  class="text-gray-600"
+                  >Edit profile</a
+                >
+              </li>
+              <li
+                class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <img src="/icons/ticket.svg" class="w-4 mr-2" alt="icon" />
+                <a
+                  [routerLink]="'/profile/tickets/' + currentUser._id"
+                  class="text-gray-600"
+                  >My Tickets</a
+                >
+              </li>
+
+              <li
+                class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <img src="/icons/logout.svg" class="w-4 mr-2" alt="icon" />
+                <a (click)="logout()" class="text-gray-600">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div class="flex items-center md:hidden">
         <app-drawer></app-drawer>
       </div>
-
     </div>
   </div>
 </nav>
-<div class="h-16"></div> <!-- Placeholder to push content below the navbar -->
+<div class="h-16"></div>
+<!-- Placeholder to push content below the navbar -->

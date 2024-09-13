@@ -6,12 +6,13 @@ import { RegisterComponent } from './pages/register/register.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
 import { authGuard } from './services/guard/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UserTicketsComponent } from './pages/user-tickets/user-tickets.component';
+import { BookTicketComponent } from './pages/book-ticket/book-ticket.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [authGuard]
   },
   {
     path: 'login',
@@ -22,13 +23,18 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'ticket/:id',
-    component: TicketComponent,
+    path: 'book-ticket/:id',
+    component: BookTicketComponent,
     canActivate: [authGuard]
   },
   {
     path: 'profile/:id',
     component: ProfileComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: "profile/tickets/:id",
+    component: UserTicketsComponent,
     canActivate: [authGuard]
   }
 ];
