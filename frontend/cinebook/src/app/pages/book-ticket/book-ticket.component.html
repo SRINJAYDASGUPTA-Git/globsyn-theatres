@@ -1,26 +1,28 @@
 <app-navbar></app-navbar>
-<div class="flex items-center justify-center gap-2 p-5">
-  <img [src]="movie.poster" alt="movie.name" />
+<div class="flex items-center justify-center gap-4 p-5">
+  <img
+    [src]="movie.poster"
+    alt="{{ movie.name }}"
+    class="w-1/3 md:w-1/4 h-auto object-cover rounded-lg shadow-md"
+  />
   <form
     #ticketForm="ngForm"
-    class="w-[100%] md:w-[25%] bg-white/40 p-5 py-6 rounded-xl backdrop-blur-sm items-center justify-center flex flex-col gap-5 form-signin"
+    class="w-full md:w-1/3 bg-white/40 p-5 py-6 rounded-xl backdrop-blur-sm flex flex-col gap-5 form-signin"
   >
-    <span class="text-4xl md:text-3xl py-4 font-bold heading"
-      >Book Your Ticket</span
-    >
-    <div
-      class="flex flex-col w-[100%] md:w-[90%] bg-white p-2 px-4 rounded-xl text-[12px] gap-1"
-    >
-      <label>Name: </label>
+    <span class="text-4xl md:text-3xl py-4 font-bold heading">
+      Book Your Ticket
+    </span>
+    <div class="flex flex-col w-full md:w-full bg-white p-4 rounded-xl text-sm gap-3">
+      <label>Name:</label>
       <input
         type="text"
         name="name"
         required
         [(ngModel)]="ticketRequest.name"
-        autofocus=""
+        autofocus
         #name="ngModel"
         placeholder="Enter your Name"
-        class="bg-transparent border-transparent focus:outline-none focus:ring-transparent focus:border-none form-control"
+        class="bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500"
       />
       <label>Select Seat Type:</label>
       <select
@@ -28,9 +30,8 @@
         [(ngModel)]="ticketRequest.seatType"
         (ngModelChange)="onSeatTypeChange($event)"
         required
-        class="bg-transparent border-transparent focus:outline-none focus:ring-transparent focus:border-none form-control"
+        class="bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500"
       >
-        <!-- Loop through seat types from the screen object -->
         <option *ngFor="let seat of screen.seatLayout" [value]="seat.type">
           {{ seat.type }}
         </option>
@@ -45,21 +46,17 @@
         [(ngModel)]="ticketRequest.tickets"
         (ngModelChange)="updateSeats($event)"
         placeholder="1"
-        class="focus:outline-none focus:ring-transparent focus:border-none form-control"
+        class="bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500"
       />
       <p class="text-lg">Select your showtime:</p>
       <select
-        name="seatType"
+        name="time"
         [(ngModel)]="ticketRequest.time"
         (ngModelChange)="onTimeChange($event)"
         required
-        class="bg-transparent border-transparent focus:outline-none focus:ring-transparent focus:border-none form-control"
+        class="bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500"
       >
-        <!-- Loop through seat types from the screen object -->
-        <option
-          *ngFor="let schedule of schedules"
-          [value]="schedule.start_time"
-        >
+        <option *ngFor="let schedule of schedules" [value]="schedule.start_time">
           {{ schedule.start_time }}
         </option>
       </select>
@@ -68,16 +65,19 @@
         name="date"
         [(ngModel)]="ticketRequest.date"
         required
-        class="bg-transparent border-transparent focus:outline-none focus:ring-transparent focus:border-none form-control"
+        class="bg-transparent border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500"
       >
-        <!-- Loop through available dates -->
         <option *ngFor="let date of availableDates" [value]="date">
           {{ date }}
         </option>
       </select>
     </div>
-    <button (click)="bookTicket()" type="submit" class="rounded-xl p-2 bg-[#f84464] text-white w-[50%]">
-      Pay: &#x20B9; {{ticketRequest.tickets > 0 ? (ticketRequest.price + 200.0):0}}
+    <button
+      (click)="bookTicket()"
+      type="submit"
+      class="rounded-xl p-2 bg-[#f84464] text-white w-1/2 mx-auto"
+    >
+      Pay: &#x20B9; {{ ticketRequest.tickets > 0 ? (ticketRequest.price + 200.0) : 0 }}
     </button>
   </form>
 </div>
