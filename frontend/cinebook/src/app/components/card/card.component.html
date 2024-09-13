@@ -1,17 +1,19 @@
-<div class="max-w-sm rounded overflow-hidden shadow-lg bg-white m-4">
-    <img class="w-full" [src]="movie.poster" alt="{{ movie.name }}">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">{{ movie.name }}</div>
-      <p class="text-gray-700 text-base">{{ movie.director }}</p>
-      <p class="text-gray-700 text-sm flex gap-2">
-        <strong>IMDB Rating:</strong>
-        <app-rating [rating]="movie.imdb_rating"></app-rating>
-        {{movie.imdb_rating}}
-      </p>
-    </div>
-    <div class="px-6 pt-4 pb-2">
-      <a [routerLink]="'/book-ticket/' + movie._id" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Book Now
-      </a>
-    </div>
+<div class="max-w-xs rounded overflow-hidden shadow-md bg-white m-2">
+  <div class="w-full h-96 relative">
+    <img class="w-full h-full object-cover" [src]="movie.poster" alt="{{ movie.name }}">
   </div>
+  <div class="px-4 py-3">
+    <div class="font-bold text-lg mb-1">{{ movie.name }}</div>
+    <p class="text-gray-600 text-sm mb-2">{{ movie.director }}</p>
+    <p class="text-gray-600 text-xs flex items-center gap-1">
+      <strong>IMDB Rating:</strong>
+      <app-rating [rating]="movie.imdb_rating"></app-rating>
+      {{ movie.imdb_rating }}
+    </p>
+  </div>
+  <div class="px-4 pb-2">
+    <a [routerLink]="'/book-ticket/' + movie._id" class="inline-block bg-blue-400 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded text-xs">
+      Book Now
+    </a>
+  </div>
+</div>
