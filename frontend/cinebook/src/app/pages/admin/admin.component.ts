@@ -108,20 +108,17 @@ export class AdminComponent implements OnInit {
     const confirmDelete = confirm(
       'Are you sure you want to delete this movie?'
     );
-    if(confirmDelete){
-      console.log(movieId);
+    if (confirmDelete) {
+      this.movieService.movieIdDelete({ id: movieId }).subscribe({
+        next: () => {
+          console.log('Movie deleted successfully');
+          this.loadMovies();
+        },
+        error: (error) => {
+          console.error('Error deleting movie:', error);
+        },
+      });
     }
-    // if (confirmDelete) {
-    //   this.movieService.movieIdDelete({ id: movieId }).subscribe({
-    //     next: () => {
-    //       console.log('Movie deleted successfully');
-    //       this.loadMovies();
-    //     },
-    //     error: (error) => {
-    //       console.error('Error deleting movie:', error);
-    //     },
-    //   });
-    // }
   }
 
   addMovie() {

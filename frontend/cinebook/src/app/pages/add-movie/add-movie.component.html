@@ -13,18 +13,6 @@
   </div>
 
   <div class="mb-4">
-    <label for="description" class="block text-gray-700 font-semibold mb-2">Description</label>
-    <textarea id="description" formControlName="description" placeholder="Enter movie description"
-              rows="4"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-    </textarea>
-    <div *ngIf="movieForm.get('description')?.invalid && movieForm.get('description')?.touched"
-         class="text-red-500 mt-1 text-sm">
-      Description is required.
-    </div>
-  </div>
-
-  <div class="mb-4">
     <label for="releaseDate" class="block text-gray-700 font-semibold mb-2">Release Date</label>
     <input id="releaseDate" formControlName="releaseDate" type="date"
            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -34,7 +22,7 @@
     </div>
   </div>
 
-  <div class="mb-6">
+  <div class="mb-4">
     <label for="genre" class="block text-gray-700 font-semibold mb-2">Genre</label>
     <select id="genre" formControlName="genre"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -51,10 +39,70 @@
     </div>
   </div>
 
+  <div class="mb-4">
+    <label for="duration" class="block text-gray-700 font-semibold mb-2">Duration (in minutes)</label>
+    <input id="duration" formControlName="duration" type="number" placeholder="Enter movie duration"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('duration')?.invalid && movieForm.get('duration')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Duration is required and must be a number.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="cast" class="block text-gray-700 font-semibold mb-2">Cast (comma-separated)</label>
+    <input id="cast" formControlName="cast" type="text" placeholder="Enter cast members (comma separated)"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('cast')?.invalid && movieForm.get('cast')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Cast is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="director" class="block text-gray-700 font-semibold mb-2">Director</label>
+    <input id="director" formControlName="director" type="text" placeholder="Enter movie director"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('director')?.invalid && movieForm.get('director')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Director is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="imdbRating" class="block text-gray-700 font-semibold mb-2">IMDB Rating</label>
+    <input id="imdbRating" formControlName="imdb_rating" type="number" step="0.1" max="10" min="0"
+           placeholder="Enter IMDB rating"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('imdb_rating')?.invalid && movieForm.get('imdb_rating')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      IMDB rating is required and must be between 0 and 10.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="poster" class="block text-gray-700 font-semibold mb-2">Poster URL</label>
+    <input id="poster" formControlName="poster" type="text" placeholder="Enter poster URL"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('poster')?.invalid && movieForm.get('poster')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Poster URL is required.
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <label for="language" class="block text-gray-700 font-semibold mb-2">Language</label>
+    <input id="language" formControlName="language" type="text" placeholder="Enter language"
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <div *ngIf="movieForm.get('language')?.invalid && movieForm.get('language')?.touched"
+         class="text-red-500 mt-1 text-sm">
+      Language is required.
+    </div>
+  </div>
+
   <button type="submit"
           [disabled]="movieForm.invalid"
           class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
     Add Movie
   </button>
 </form>
-
