@@ -278,7 +278,7 @@ router.delete("/:id", async (req, res) => {
     if (!movie) {
       return res.status(404).json({ message: "Movie not found" });
     }
-    await movie.remove();
+    await Movie.deleteOne({ _id: id });
     res.status(200).json({ message: "Movie deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
