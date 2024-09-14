@@ -80,7 +80,7 @@ export class AdminComponent implements OnInit {
       });
     }
   }
-  deleteMovie(movieId?: string): void {
+  deleteMovie(movieId: string): void {
     if (!movieId) {
       console.error('Movie ID is undefined');
       return;

@@ -41,7 +41,7 @@
           </button>
           <button
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            (click)="deleteMovie(movie._id)"
+            (click)="deleteMovie(movie._id || '')"
           >
             Delete Movie
           </button>
@@ -63,21 +63,7 @@
   <table
     class="min-w-full leading-normal bg-white shadow-md rounded-lg overflow-hidden"
   >
-    <thead>
-      <tr class="bg-gray-100 text-left">
-        <th
-          class="px-5 py-3 border-b-2 border-gray-200 text-gray-600 text-sm uppercase font-semibold"
-        >
-          Name
-        </th>
-
-        <th
-          class="px-5 py-3 border-b-2 border-gray-200 text-gray-600 text-sm uppercase font-semibold flex items-center justify-center"
-        >
-          Actions
-        </th>
-      </tr>
-    </thead>
+    
     <tbody>
       <tr *ngFor="let Schedule of schedules">
         <td class="px-5 py-5 border-b border-gray-200 text-sm">{{Schedule.start_time}}</td>
